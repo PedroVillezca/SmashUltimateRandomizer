@@ -48,6 +48,10 @@
 	background-color: #890C0C;
 	border-color: #890C0C;
 }
+
+.unloaded {
+	display: none;
+}
 /* ===== ALL ===== */
 
 /* ===== HEADER ===== */

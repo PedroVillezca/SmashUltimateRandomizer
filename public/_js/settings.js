@@ -16,6 +16,8 @@ function startUp () {
 	handleCharacters()
 	loadStages()
 	handleStages()
+	loadSkins()
+	handleSkins()
 }
 
 function loadCharacters () {
@@ -25,8 +27,8 @@ function loadCharacters () {
 	for (let i = 0; i < characterFolders.length; i++) {
 		let currentColumn = $(`<div class="col img-thumbnail"></div>`)
 		let currentImage = $(`<img class="img-fluid" src="./_assets/_renders/${characterFolders[i]}/01.png">`)
-		$(currentColumn).data('characterNumber', i)
-		$(currentImage).data('characterNumber', i)
+		$(currentColumn).data('characterNumber', i+1)
+		$(currentImage).data('characterNumber', i+1)
 		$(currentColumn).append(currentImage)
 		if (perRow >= 8) {
 			$(characterSelect).append(newRow)
@@ -68,6 +70,26 @@ function loadStages () {
 	$(stageSelect).append(newRow)
 }
 
+function loadSkins() {
+	let skinSelect = $('#skinSelect')
+	for (let i = 0; i < characterFolders.length; i++) {
+		let newRow = $(`<div class="row" id="skins${i+1}""></div>`)
+		if (characterFolders[i] != '51' && characterFolders[i] != '52' && characterFolders[i] != '53') {
+			for (let j = 1; j <= 8; j++) {
+				let currentColumn = $(`<div class="col img-thumbnail"></div>`)
+				let currentImage = $(`<img class="img-fluid" src="./_assets/_renders/${characterFolders[i]}/0${j}.png">`)
+				$(currentColumn).data('characterNumber', i+1)
+				$(currentColumn).data('skinNumber', j)
+				$(currentImage).data('characterNumber', i+1)
+				$(currentImage).data('skinNumber', i)
+				$(currentColumn).append(currentImage)
+				$(newRow).append(currentColumn)
+			}
+		}
+		$(skinSelect).append(newRow)
+	}
+}
+
 function handleCharacters () {
 	// Entire roster toggle
 	let toggleCharactersBtn = $('#toggleCharacters')
@@ -77,8 +99,10 @@ function handleCharacters () {
 		for (let i = 0; i < characters.length; i++) {
 			if (toggleCharacters) {
 				$(characters[i]).addClass('toggled-off')
+				toggleSkin(i+1, false)
 			} else {
 				$(characters[i]).removeClass('toggled-off')
+				toggleSkin(i+1, true)
 			}
 		}
 
@@ -94,6 +118,7 @@ function handleCharacters () {
 	for (let i = 0; i < characters.length; i++){
 		$(characters[i]).on('click', (e) => {
 			e.preventDefault()
+			toggleSkin(i+1, $(characters[i]).hasClass('toggled-off'))
 			$(characters[i]).toggleClass('toggled-off')
 		})
 	}
@@ -127,6 +152,37 @@ function handleStages () {
 			e.preventDefault()
 			$(stages[i]).toggleClass('toggled-off')
 		})
+	}
+}
+
+function handleSkins () {
+	// Individual character toggling
+	let skins = $('#skinSelect .img-fluid')
+	for (let i = 0; i < skins.length; i++) {
+		$(skins[i]).on('click', (e) => {
+			e.preventDefault()
+			$(skins[i]).toggleClass('toggled-off')
+		})
+	}
+
+	// Entire div toggling
+	let skinsCheck = $('#skinsCheck')
+	let skinSelect = $('#skinSelect')
+	$(skinsCheck).change( () => {
+		if ($(skinsCheck).is(':checked')) {
+			skinSelect.removeClass('unloaded')
+		} else {
+			skinSelect.addClass('unloaded')
+		}
+	})
+}
+
+function toggleSkin (number, state) {
+	let skinRow = $(`#skins${number}`)
+	if (state) {
+		$(skinRow).removeClass('unloaded')
+	} else {
+		$(skinRow).addClass('unloaded')
 	}
 }
 
