@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  	<title>Super Smash Bros. Ultimate Randomizer</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  	<link rel="stylesheet" type="text/css" href="./_css/style.css">
+  </head>
+  <body id="settings">
+    <header>
+      <div class="container-fluid text-center" id="headerBg">
+        <img class= "img-fluid" src="./_assets/_logos/logoWhite.png" id="logoWhite">
+      </div>
+      <nav class="navbar navbar-expand-sm">
+        <ul class="navbar-nav nav-fill w-100">
+          <li class="nav-item">
+            <a class="nav-link" href="./main.html">Home</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link active" href="./settings.html">Settings</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./search.html">Search</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./metrics.html">Metrics</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./profile.html">Profile</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <content>
+
+      <div class="container-fluid grid-div" id='characterSelect'>
+        <div class="container-fluid text-center section-title">
+          <h2>Character Select</h2>
+        </div>
+        <div class="form-check">
+          <label><input type="checkbox" class="form-check-input" value="">Randomize skins?</label>
+        </div>
+        <button class="btn btn-primary" id="toggleCharacters">All Off</button>
+      </div>
+
+      <hr/>
+
+      <div class="container-fluid" id="skinSelect">
+        <div class="row">
+          <div class="col img-thumbnail">
+            <img class="img-fluid toggled-off" src="./_assets/_renders/01.png">
+          </div>
+          <div class="col img-thumbnail">
+            <img class="img-fluid" src="./_assets/_renders/01.png">
+          </div>
+          <div class="col img-thumbnail">
+            <img class="img-fluid" src="./_assets/_renders/01.png">
+          </div>
+          <div class="col img-thumbnail">
+            <img class="img-fluid" src="./_assets/_renders/01.png">
+          </div>
+          <div class="col img-thumbnail">
+            <img class="img-fluid toggled-off" src="./_assets/_renders/01.png">
+          </div>
+          <div class="col img-thumbnail">
+            <img class="img-fluid" src="./_assets/_renders/01.png">
+          </div>
+          <div class="col img-thumbnail">
+            <img class="img-fluid" src="./_assets/_renders/01.png">
+          </div>
+          <div class="col img-thumbnail">
+            <img class="img-fluid" src="./_assets/_renders/01.png">
+          </div>
+        </div>
+      </div>
+
+      <hr/>
+      <div class="container-fluid grid-div" id="stageSelect">
+        <div class="container-fluid text-center section-title">
+          <h2>Stage Select</h2>
+        </div>
+        <div class="form-check">
+          <label><input type="checkbox" class="form-check-input" value="">Include Omega forms?</label>
+          <br/>
+          <label><input type="checkbox" class="form-check-input" value="">Include Battlefield forms?</label>
+        </div>
+        <button class="btn btn-primary" id="toggleStages">All Off</button>
+      </div>
+
+      </div>
+
+      <hr/>
+
+      <div class="container-fluid" id="omegaSelect">
+        <div class="row">
+          <div class="col img-thumbnail">
+            <img class="img-fluid toggled-off" src="./_assets/_stages/stage_img1.jpg">
+          </div>
+          <div class="col img-thumbnail">
+            <img class="img-fluid" src="./_assets/_stages/stage_img1.jpg">
+          </div>
+          <div class="col img-thumbnail">
+            <img class="img-fluid" src="./_assets/_stages/stage_img1.jpg">
+          </div>
+          <div class="col img-thumbnail">
+            <img class="img-fluid" src="./_assets/_stages/stage_img1.jpg">
+          </div>
+          <div class="col img-thumbnail">
+            <img class="img-fluid toggled-off" src="./_assets/_stages/stage_img1.jpg">
+          </div>
+          <div class="col img-thumbnail">
+            <img class="img-fluid" src="./_assets/_stages/stage_img1.jpg">
+          </div>
+          <div class="col img-thumbnail">
+            <img class="img-fluid" src="./_assets/_stages/stage_img1.jpg">
+          </div>
+          <div class="col img-thumbnail">
+            <img class="img-fluid" src="./_assets/_stages/stage_img1.jpg">
+          </div>
+        </div>
+      </div>
+
+      <hr/>
+
+      <div class="container-fluid" id="battlefieldSelect">
+        <div class="row">
+          <div class="col img-thumbnail">
+            <img class="img-fluid toggled-off" src="./_assets/_stages/stage_img1.jpg">
+          </div>
+          <div class="col img-thumbnail">
+            <img class="img-fluid" src="./_assets/_stages/stage_img1.jpg">
+          </div>
+          <div class="col img-thumbnail">
+            <img class="img-fluid" src="./_assets/_stages/stage_img1.jpg">
+          </div>
+          <div class="col img-thumbnail">
+            <img class="img-fluid" src="./_assets/_stages/stage_img1.jpg">
+          </div>
+          <div class="col img-thumbnail">
+            <img class="img-fluid toggled-off" src="./_assets/_stages/stage_img1.jpg">
+          </div>
+          <div class="col img-thumbnail">
+            <img class="img-fluid" src="./_assets/_stages/stage_img1.jpg">
+          </div>
+          <div class="col img-thumbnail">
+            <img class="img-fluid" src="./_assets/_stages/stage_img1.jpg">
+          </div>
+          <div class="col img-thumbnail">
+            <img class="img-fluid" src="./_assets/_stages/stage_img1.jpg">
+          </div>
+        </div>
+      </div>
+
+      <hr/>
+
+
+
+    </content>
+    <script src="./_js/settings.js"></script>
+  </body>
+</html>

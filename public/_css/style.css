@@ -1,0 +1,218 @@
+/* ===== ALL ===== */
+
+.fill {
+	height: 100vh;
+	max-height: auto;
+}
+
+.full {
+	flex-basis: 100%;
+}
+
+.scroll {
+	overflow-y: auto;
+}
+
+.vertical-center {
+	display: flex;
+	flex-wrap: wrap;
+	align-content: flex-start;
+}
+
+.half-height {
+	display: flex;
+	align-items: center;
+}
+
+.variation-text{
+	margin-top: 20%;
+	font-size: 1.5em;
+}
+
+.toggled-off {
+	opacity: 50%;
+}
+
+.img-thumbnail {
+	border-color: black;
+	border-width: 2px;
+	border-style: solid;
+}
+
+.btn-primary{
+	background-color: #A31010;
+	border-color: #A31010;
+}
+
+.btn-primary:hover {
+	background-color: #890C0C;
+	border-color: #890C0C;
+}
+/* ===== ALL ===== */
+
+/* ===== HEADER ===== */
+
+header #headerBg {
+	background-color: black;
+}
+
+header #logoWhite {
+	max-width: 150px;
+	margin-top: 5px;
+}
+
+header .navbar {
+	background-color: black;
+}
+
+header .nav-item {
+	border-bottom: 3px solid black;
+}
+
+header .nav-item:hover {
+	border-bottom: 3px solid white;
+}
+
+header .active.nav-item{
+	border-bottom: 3px solid white;
+}
+
+header .nav-link {
+	color: #949494;
+}
+
+header .nav-link:hover {
+	color: white;
+}
+
+header .active.nav-link {
+	color: white;
+}
+
+/* ===== HEADER ===== */
+
+/* ===== LOGIN ===== */
+
+#login .card {
+	max-width: 30%;
+	min-width: 400px;
+	border-radius: 10px;
+}
+
+#login .card-title {
+	text-align: center;
+}
+
+#login .btn-dark {
+	padding-left: 20%;
+	padding-right: 20%;
+}
+
+#login .container > img{
+	margin: 5% 0% 5% 0%;
+}
+
+/* ===== LOGIN ===== */
+
+/* ===== MAIN ===== */
+
+#main #sidebar {
+	border-width: 0 0 0 3px;
+	border-style: solid;
+	border-color: black;
+}
+
+#main .card {
+	margin-top: 5px;
+ 	border-color: #A31010;
+}
+
+#main img {
+	width: 100%;
+}
+
+#main #btRandomize {
+	min-width: 75%;
+	font-size: 1.5em;
+}
+
+#main #randomizer .container-fluid {
+	margin-top: 5%;
+}
+
+#main .card:hover {
+	color: #A31010;
+}
+
+#main .current-set-title {
+	margin-bottom: 30px;
+}
+
+/* ===== MAIN ===== */
+
+/* ===== SETTINGS ===== */
+
+#settings .col.img-thumbnail {
+	margin: 5px 1px;
+	padding: 0;
+	display: flex;
+	align-items: center;
+}
+
+#settings .col .img-fluid.toggled-off:hover{
+	opacity: 80%;
+}
+
+#settings .section-title {
+	margin: 5% 0;
+}
+
+
+/* ===== SETTINGS ===== */
+
+/* ===== PROFILE ===== */
+/* ===== PROFILE ===== */
+
+/* ===== SEARCH ===== */
+/* ===== SEARCH ===== */
+
+/* ===== METRICS ===== */
+/* ===== METRICS ===== */
+
+/* ===== MEDIA QUERIES ===== */
+
+@media (min-width: 768px) {
+	/* ===== ALL ===== */
+	.variation-text{
+		font-size: 2em;
+	}
+
+	.grid-div {
+		max-width: 90%;
+	}
+	/* ===== ALL ===== */
+
+	/* ===== SETTINGS ===== */
+
+	#settings .section-title {
+		font-size: 10em;
+	}
+
+	/* ===== SETTINGS ===== */
+}
+
+@media (min-width: 992px) {
+	/* ===== ALL ===== */
+    .variation-text{
+		font-size: 2.5em;
+	}
+	/* ===== ALL ===== */
+
+	#settings .section-title h2{
+		font-size: 0.4em;
+	}
+
+	/* ===== SETTINGS ===== */
+}
+
+/* ===== MEDIA QUERIES ===== */

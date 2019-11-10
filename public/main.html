@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  	<title>Super Smash Bros. Ultimate Randomizer</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  	<link rel="stylesheet" type="text/css" href="./_css/style.css">
+  	<script src="./_js/main.js"></script>
+  </head>
+  <body id="main">
+    <header>
+      <div class="container-fluid text-center" id="headerBg">
+        <img class= "img-fluid" src="./_assets/_logos/logoWhite.png" id="logoWhite">
+      </div>
+      <nav class="navbar navbar-expand-sm">
+        <ul class="navbar-nav nav-fill w-100">
+          <li class="nav-item active">
+            <a class="nav-link active" href="./main.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./settings.html">Settings</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./search.html">Search</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./metrics.html">Metrics</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./profile.html">Profile</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <content>
+
+      <div class="container-fluid h-100 overflow-hidden">
+
+        <div class="row h-100 flex-grow-1 overflow-hidden">
+
+          <div class="col-8 fill overflow-hidden half-height" id="randomizer">
+
+            <div class="container vertical-center">
+              <div class="container text-center">
+                <h2 class="current-set-title">Swords Only But I Made The Description Really Long</h2>
+              </div>
+              <div class="row justify-content-center" id="resultsRow">
+                <div class="col-6">
+                  <img class="img-fluid img-thumbnail" src="./_assets/_renders/01.png">
+                </div>
+                <div class="col-6">
+                  <img class="img-fluid img-thumbnail" src="./_assets/_stages/stage_img1.jpg">
+                  <div class="container text-center">
+                    <h5 class="variation-text">Normal</h5>
+                  </div>
+                </div>
+              </div>
+              <div class="container-fluid text-center">
+                <button class="btn btn-dark" id="btRandomize">Randomize!</button>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-4 fill scroll" id="sidebar">
+
+            <div class="card text-center">
+              <div class="card-body">
+                <h5 class="card-title">Swords Only But I Made The Description Really Long</h5>
+                <a href="#" class="stretched-link"></a>
+              </div>
+            </div>
+            <div class="card text-center">
+              <div class="card-body">
+                <h5 class="card-title">Pokemon Only</h5>
+                <a href="#" class="stretched-link"></a>
+              </div>
+            </div>
+            <div class="card text-center">
+              <div class="card-body">
+                <h5 class="card-title">RNG Only</h5>
+                <a href="#" class="stretched-link"></a>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </content>
+  </body>
+</html>
