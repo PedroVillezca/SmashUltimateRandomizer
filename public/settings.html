@@ -66,7 +66,7 @@
         <div class="form-check">
           <label><input type="checkbox" class="form-check-input" value="" id="omegasCheck">Include Omega forms?</label>
           <br/>
-          <label><input type="checkbox" class="form-check-input" value="">Include Battlefield forms?</label>
+          <label><input type="checkbox" class="form-check-input" value="" id="battlefieldsCheck">Include Battlefield forms?</label>
         </div>
         <button class="btn btn-primary" id="toggleStages">All Off</button>
       </div>
@@ -80,41 +80,29 @@
           <h2>Omega Form Select</h2>
         </div>
         <button class="btn btn-primary" id="toggleOmegas">All Off</button>
+
       </div>
 
       <hr/>
 
-      <div class="container-fluid grid-div" id="battlefieldSelect">
-        <div class="row">
-          <div class="col img-thumbnail">
-            <img class="img-fluid toggled-off" src="./_assets/_stages/stage_img1.jpg">
-          </div>
-          <div class="col img-thumbnail">
-            <img class="img-fluid" src="./_assets/_stages/stage_img1.jpg">
-          </div>
-          <div class="col img-thumbnail">
-            <img class="img-fluid" src="./_assets/_stages/stage_img1.jpg">
-          </div>
-          <div class="col img-thumbnail">
-            <img class="img-fluid" src="./_assets/_stages/stage_img1.jpg">
-          </div>
-          <div class="col img-thumbnail">
-            <img class="img-fluid toggled-off" src="./_assets/_stages/stage_img1.jpg">
-          </div>
-          <div class="col img-thumbnail">
-            <img class="img-fluid" src="./_assets/_stages/stage_img1.jpg">
-          </div>
-          <div class="col img-thumbnail">
-            <img class="img-fluid" src="./_assets/_stages/stage_img1.jpg">
-          </div>
-          <div class="col img-thumbnail">
-            <img class="img-fluid" src="./_assets/_stages/stage_img1.jpg">
-          </div>
+      <div class="container-fluid grid-div unloaded" id="battlefieldSelect">
+        <div class="container-fluid text-center section-title">
+          <h2>Battlefield Form Select</h2>
         </div>
+        <button class="btn btn-primary" id="toggleBattlefields">All Off</button>
+
       </div>
 
       <hr/>
 
+      <div class="container text-center" id="saveForm">
+        <form>
+          <div class="form-group">
+            <input type="text" class="form-control" id="setTitle" placeholder="Name this set">
+          </div>
+          <button class="btn btn-dark" id="saveSet">Save</button>
+        </form>
+      </div>
 
 
     </content>

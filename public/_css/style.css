@@ -171,6 +171,13 @@ header .active.nav-link {
 	margin: 5% 0;
 }
 
+#settings #saveForm {
+	margin-bottom: 10px;
+}
+
+#settings #saveSet {
+	min-width: 50%;
+}
 
 /* ===== SETTINGS ===== */
 

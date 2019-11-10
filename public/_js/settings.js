@@ -11,6 +11,7 @@ let characterFolders = ["01", "02", "03", "04", "04e", "05", "06", "07",
 let toggleCharacters = true
 let toggleStages = true
 let toggleOmegas = true
+let toggleBattlefields = true
 
 function startUp () {
 	loadCharacters()
@@ -21,6 +22,8 @@ function startUp () {
 	handleSkins()
 	loadOmegas()
 	handleOmegas()
+	loadBattlefields()
+	handleBattlefields()
 }
 
 
@@ -75,7 +78,7 @@ function loadStages () {
 	$(stageSelect).append(newRow)
 }
 
-function loadSkins() {
+function loadSkins () {
 	let skinSelect = $('#skinSelect')
 	for (let i = 0; i < characterFolders.length; i++) {
 		let newRow = $(`<div class="row" id="skins${i+1}""></div>`)
@@ -95,7 +98,7 @@ function loadSkins() {
 	}
 }
 
-function loadOmegas() {
+function loadOmegas () {
 	let omegaSelect = $('#omegaSelect')
 	let perRow = 0
 	let newRow = $(`<div class="row"></div>`)
@@ -118,6 +121,31 @@ function loadOmegas() {
 		perRow += 1
 	}
 	$(omegaSelect).append(newRow)
+}
+
+function loadBattlefields () {
+	let battlefieldSelect = $('#battlefieldSelect')
+	let perRow = 0
+	let newRow = $(`<div class="row"></div>`)
+	for (let i = 1; i < 104; i++) {
+		let currentColumn = $(`<div class="col img-thumbnail"></div>`)
+		let currentImage = $(`<img class="img-fluid" src="./_assets/_stages/stage_img${i}.jpg">`)
+		$(currentColumn).data('battlefieldNumber', i)
+		$(currentImage).data('battlefieldNumber', i)
+		$(currentColumn).append(currentImage)
+		if (perRow >= 8) {
+			$(battlefieldSelect).append(newRow)
+			newRow = $(`<div class="row"></div>`)
+			perRow = 0
+		}
+		$(newRow).append(currentColumn)
+		perRow += 1
+	}
+	while (perRow < 7) {
+		$(newRow).append(`<div class="col"></div>`)
+		perRow += 1
+	}
+	$(battlefieldSelect).append(newRow)
 }
 
 // Selection handlers
@@ -246,6 +274,48 @@ function handleOmegas () {
 			omegaSelect.removeClass('unloaded')
 		} else {
 			omegaSelect.addClass('unloaded')
+		}
+	})
+}
+
+function handleBattlefields () {
+	// All battlefields toggling
+	let toggleBattlefieldsBtn = $('#toggleBattlefields')
+	let battlefields = $('#battlefieldSelect .img-fluid')
+	$(toggleBattlefieldsBtn).on('click', (e) => {
+		e.preventDefault();
+		for (let i = 0; i < battlefields.length; i++) {
+			if (toggleBattlefields) {
+				$(battlefields[i]).addClass('toggled-off')
+			} else {
+				$(battlefields[i]).removeClass('toggled-off')
+			}
+		}
+
+		toggleBattlefields = !toggleBattlefields
+		if (toggleBattlefields) {
+			$(toggleBattlefieldsBtn).html('All Off')
+		} else {
+			$(toggleBattlefieldsBtn).html('All On')
+		}
+	})
+
+	// Individual battlefield toggling
+	for (let i = 0; i < battlefields.length; i++) {
+		$(battlefields[i]).on('click', (e) => {
+			e.preventDefault()
+			$(battlefields[i]).toggleClass('toggled-off')
+		})
+	}
+
+	// Entire div toggling
+	let battlefieldsCheck = $('#battlefieldsCheck')
+	let battlefieldSelect = $('#battlefieldSelect')
+	$(battlefieldsCheck).change( () => {
+		if ($(battlefieldsCheck).is(':checked')) {
+			battlefieldSelect.removeClass('unloaded')
+		} else {
+			battlefieldSelect.addClass('unloaded')
 		}
 	})
 }
