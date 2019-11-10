@@ -10,6 +10,7 @@ let characterFolders = ["01", "02", "03", "04", "04e", "05", "06", "07",
 						"66e", "67", "68", "69", "70", "71"]
 let toggleCharacters = true
 let toggleStages = true
+let toggleOmegas = true
 
 function startUp () {
 	loadCharacters()
@@ -18,8 +19,12 @@ function startUp () {
 	handleStages()
 	loadSkins()
 	handleSkins()
+	loadOmegas()
+	handleOmegas()
 }
 
+
+// Image Loaders
 function loadCharacters () {
 	let characterSelect = $('#characterSelect')
 	let perRow = 0
@@ -90,8 +95,34 @@ function loadSkins() {
 	}
 }
 
+function loadOmegas() {
+	let omegaSelect = $('#omegaSelect')
+	let perRow = 0
+	let newRow = $(`<div class="row"></div>`)
+	for (let i = 1; i < 104; i++) {
+		let currentColumn = $(`<div class="col img-thumbnail"></div>`)
+		let currentImage = $(`<img class="img-fluid" src="./_assets/_stages/stage_img${i}.jpg">`)
+		$(currentColumn).data('omegaNumber', i)
+		$(currentImage).data('omegaNumber', i)
+		$(currentColumn).append(currentImage)
+		if (perRow >= 8) {
+			$(omegaSelect).append(newRow)
+			newRow = $(`<div class="row"></div>`)
+			perRow = 0
+		}
+		$(newRow).append(currentColumn)
+		perRow += 1
+	}
+	while (perRow < 7) {
+		$(newRow).append(`<div class="col"></div>`)
+		perRow += 1
+	}
+	$(omegaSelect).append(newRow)
+}
+
+// Selection handlers
 function handleCharacters () {
-	// Entire roster toggle
+	// Entire roster toggling
 	let toggleCharactersBtn = $('#toggleCharacters')
 	let characters = $('#characterSelect .img-fluid')
 	$(toggleCharactersBtn).on('click', (e) => {
@@ -114,7 +145,7 @@ function handleCharacters () {
 		}
 	})
 
-	// Individual character toggle
+	// Individual character toggling
 	for (let i = 0; i < characters.length; i++){
 		$(characters[i]).on('click', (e) => {
 			e.preventDefault()
@@ -125,7 +156,7 @@ function handleCharacters () {
 }
 
 function handleStages () {
-	// All stages toggle
+	// All stages toggling
 	let toggleStagesBtn = $('#toggleStages')
 	let stages = $('#stageSelect .img-fluid')
 	$(toggleStagesBtn).on('click', (e) => {
@@ -146,7 +177,7 @@ function handleStages () {
 		}
 	})
 
-	// Individual character toggle
+	// Individual stage toggling
 	for (let i = 0; i < stages.length; i++) {
 		$(stages[i]).on('click', (e) => {
 			e.preventDefault()
@@ -177,6 +208,49 @@ function handleSkins () {
 	})
 }
 
+function handleOmegas () {
+	// All omegas toggling
+	let toggleOmegasBtn = $('#toggleOmegas')
+	let omegas = $('#omegaSelect .img-fluid')
+	$(toggleOmegasBtn).on('click', (e) => {
+		e.preventDefault();
+		for (let i = 0; i < omegas.length; i++) {
+			if (toggleOmegas) {
+				$(omegas[i]).addClass('toggled-off')
+			} else {
+				$(omegas[i]).removeClass('toggled-off')
+			}
+		}
+
+		toggleOmegas = !toggleOmegas
+		if (toggleOmegas) {
+			$(toggleOmegasBtn).html('All Off')
+		} else {
+			$(toggleOmegasBtn).html('All On')
+		}
+	})
+
+	// Individual omega toggling
+	for (let i = 0; i < omegas.length; i++) {
+		$(omegas[i]).on('click', (e) => {
+			e.preventDefault()
+			$(omegas[i]).toggleClass('toggled-off')
+		})
+	}
+
+	// Entire div toggling
+	let omegasCheck = $('#omegasCheck')
+	let omegaSelect = $('#omegaSelect')
+	$(omegasCheck).change( () => {
+		if ($(omegasCheck).is(':checked')) {
+			omegaSelect.removeClass('unloaded')
+		} else {
+			omegaSelect.addClass('unloaded')
+		}
+	})
+}
+
+// Helper functions
 function toggleSkin (number, state) {
 	let skinRow = $(`#skins${number}`)
 	if (state) {
