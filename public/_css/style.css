@@ -188,7 +188,8 @@ header .active.nav-link {
 
 #search #searchContainer {
 	width: 70%;
-	margin-top: 20%;
+	margin-top: 5%;
+	margin-bottom: 20px;
 	padding: 10px 20px;
 	border-radius: 10px;
 }
@@ -215,9 +216,16 @@ header .active.nav-link {
 #search .tag-container {
 	background-color: #EEEEEE;
 	border-radius: 10px;
-	margin-top: 10px;
-	padding: 5px 0;	
+	margin: 20px 0 15px 0;
+	padding: 10px 0;	
 }
+
+#search .tag-container .badge-primary:hover {
+	background-color: #890C0C;
+	padding: 5px;
+	cursor: pointer;
+}
+
 
 #search .tag-container .row {
 	padding: 5px;
@@ -250,6 +258,9 @@ header .active.nav-link {
 	margin: 0;
 }
 
+#search .card {
+	margin-top: 10px;
+}
 /* ===== SEARCH ===== */
 
 /* ===== METRICS ===== */
