@@ -339,10 +339,24 @@ function handleSave () {
 	let optionPublic = $('#radioPublic')
 	$(saveSet).on('click', (e) => {
 		e.preventDefault()
+
+		// Check for missing fields
 		if (!$(setTitle).val()) {
 			$(setTitle).addClass('is-invalid')
-			return;
+			return
 		}
+		let enabledCharacters = $('#characterSelect .img-fluid').not('.toggled-off')
+		if (enabledCharacters.length < 1) {
+			console.log('Please select at least one character')
+			return
+		}
+		let enabledStages = $('#stageSelect .img-fluid').not('.toggled-off')
+		if (enabledStages.length < 1) {
+			console.log('Please select at least one stage')
+			return
+		}
+
+
 		// Get set options
 		let description = $(setTitle).val()
 		let isPublic
@@ -358,12 +372,7 @@ function handleSave () {
 			}
 		}
 
-		// Get set characters
-		let enabledCharacters = $('#characterSelect .img-fluid').not('.toggled-off')
-		if (enabledCharacters.length < 1) {
-			console.log('Please select at least one character')
-			return;
-		}
+		// Get enabled characters
 		let characters = []
 		let enabledIndex = 0
 		let charIndex = 0
@@ -377,7 +386,7 @@ function handleSave () {
 			charIndex += 1
 		}
 
-		// Get set skins
+		// Get enabled skins
 		let skinsCheck = $('#skinsCheck')
 		let skinsOn
 		let skins = []
@@ -388,6 +397,10 @@ function handleSave () {
 			for (let i = 0; i < characters.length; i++) {
 				if (characters[i]) {
 					let enabledSkins = $(`#skins${i+1} .img-fluid`).not('.toggled-off')
+					if (enabledSkins.length < 1) {
+						console.log('Please make sure all of your characters have at least one skin enabled')
+						return
+					}
 					let currentSkins = {
 						character: i,
 						enabled: []
@@ -399,6 +412,86 @@ function handleSave () {
 				}
 			}
 		}
+
+		// Get enabled stages
+		let stages = []
+		enabledIndex = 0
+		let stageIndex = 0
+		while (stageIndex < 103) {
+			if ($(enabledStages[enabledIndex]).data('stageNumber') == stageIndex+1) {
+				stages.push(true)
+				enabledIndex += 1
+			} else {
+				stages.push(false)
+			}
+			stageIndex += 1
+		}
+
+		// Get enabled omegas
+		let omegasCheck = $('#omegasCheck')
+		let omegasOn
+		let omegas = []
+		if (!$(omegasCheck).is(':checked')) {
+			omegasOn = false
+		} else {
+			omegasOn = true
+			let enabledOmegas = $('#omegaSelect .img-fluid').not('.toggled-off')
+			if (enabledOmegas.length < 1) {
+				console.log('Please select at least one Omega')
+				return
+			}
+			enabledIndex = 0
+			let omegaIndex = 0
+			while (omegaIndex < 103) {
+				if ($(enabledOmegas[enabledIndex]).data('omegaNumber') == omegaIndex+1) {
+					omegas.push(true)
+					enabledIndex += 1
+				} else {
+					omegas.push(false)
+				}
+				omegaIndex += 1
+			}
+		}
+
+		// Get enabled battlefields
+		let battlefieldsCheck = $('#battlefieldsCheck')
+		let battlefieldsOn
+		let battlefields = []
+		if (!$(battlefieldsCheck).is(':checked')) {
+			battlefieldsOn = false
+		} else {
+			battlefieldsOn = true
+			let enabledBattlefields = $('#battlefieldSelect .img-fluid').not('.toggled-off')
+			if (enabledBattlefields.length < 1) {
+				console.log('Please select at least one battlefield')
+				return
+			}
+			enabledIndex = 0
+			let battlefieldIndex = 0
+			while (battlefieldIndex < 103) {
+				if ($(enabledBattlefields[enabledIndex]).data('battlefieldNumber') == battlefieldIndex+1) {
+					battlefields.push(true)
+					enabledIndex += 1
+				} else {
+					battlefields.push(false)
+				}
+				battlefieldIndex += 1
+			}
+		}
+		let rset = {
+			description: description,
+			characters: characters,
+			skinsOn: skinsOn,
+			skins: skins,
+			stages: stages,
+			omegasOn: omegasOn,
+			omegas: omegas,
+			battlefieldsOn: battlefieldsOn,
+			battlefields: battlefields,
+			tags: tags,
+			isPublic: isPublic
+		}
+		console.log(rset)
 	})
 }
 /*
