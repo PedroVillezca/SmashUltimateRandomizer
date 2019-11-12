@@ -25,6 +25,7 @@ function startUp () {
 	loadBattlefields()
 	handleBattlefields()
 	handleTags()
+	handleSave()
 }
 
 
@@ -329,6 +330,60 @@ function handleTags () {
 		})
 	}
 }
+
+function handleSave () {
+	let saveSet = $('#saveSet')
+	let setTitle = $('#setTitle')
+	let setTags = $('.tag-container .badge-primary')
+	let optionPrivate = $('#radioPrivate')
+	let optionPublic = $('#radioPublic')
+	$(saveSet).on('click', (e) => {
+		e.preventDefault()
+		if (!$(setTitle).val()) {
+			$(setTitle).addClass('is-invalid')
+			return;
+		}
+		// Get set options
+		let description = $(setTitle).val()
+		let isPublic
+		if ($(optionPrivate).is(':checked')) {
+			isPublic = false;
+		} else {
+			isPublic = true;
+		}
+		let tags = []
+		for (let i = 0; i < setTags.length; i++) {
+			if(!$(setTags[i]).hasClass('toggled-off')) {
+				tags.push($(setTags[i]).html())
+			}
+		}
+
+		// Get set characters
+		let enabledCharacters = $('#characterSelect .img-fluid').not('.toggled-off')
+		if (enabledCharacters.length < 1) {
+			console.log('Please select at least one character')
+			return;
+		}
+	})
+}
+/*
+let rsetSchema = mongoose.Schema({
+	description: {type: String, required: true},
+	characters: [Boolean],
+	skinsOn: {type: Boolean},
+	skins: [{
+		character: {type: String},
+		enabled: [Boolean]
+	}],
+	stages: [Boolean],
+	omegasOn: {type: Boolean},
+	omegas: [Boolean],
+	battlefieldsOn: {type: Boolean},
+	battlefields: [Boolean],
+	tags: [String],
+	isPublic: {type: Boolean}
+})
+*/
 
 // Helper functions
 function toggleSkin (number, state) {

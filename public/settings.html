@@ -96,9 +96,12 @@
       <hr/>
 
       <div class="container text-center" id="saveForm">
-        <form>
+        <form class="container">
           <div class="form-group">
             <input type="text" class="form-control" id="setTitle" placeholder="Name this set">
+            <div class="invalid-feedback">
+              Please include a description
+            </div>
           </div>
           <div class="container tag-container">
             <div class="row">
@@ -113,10 +116,10 @@
             </div>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="radioPrivate" name="privacySetting" value="private">
+            <input class="form-check-input" type="radio" id="radioPrivate" name="privacySetting" value="private" checked="checked">
             <label class="form-check-label" for="radioPrivate">Private</label>
           </div>
-          <div class="form-check form-check-inline">
+          <div class="form-check form-check-inline is-invalid">
             <input class="form-check-input" type="radio" id="radioPublic" name="privacySetting" value="public">
             <label class="form-check-label" for="radioPublic">Public</label>
           </div>
