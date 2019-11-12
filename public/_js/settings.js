@@ -37,8 +37,8 @@ function loadCharacters () {
 	for (let i = 0; i < characterFolders.length; i++) {
 		let currentColumn = $(`<div class="col img-thumbnail"></div>`)
 		let currentImage = $(`<img class="img-fluid" src="./_assets/_renders/${characterFolders[i]}/01.png">`)
-		$(currentColumn).data('characterNumber', i+1)
-		$(currentImage).data('characterNumber', i+1)
+		$(currentColumn).data('characterIndex', i)
+		$(currentImage).data('characterIndex', i)
 		$(currentColumn).append(currentImage)
 		if (perRow >= 8) {
 			$(characterSelect).append(newRow)
@@ -88,10 +88,10 @@ function loadSkins () {
 			for (let j = 1; j <= 8; j++) {
 				let currentColumn = $(`<div class="col img-thumbnail"></div>`)
 				let currentImage = $(`<img class="img-fluid" src="./_assets/_renders/${characterFolders[i]}/0${j}.png">`)
-				$(currentColumn).data('characterNumber', i+1)
+				$(currentColumn).data('characterIndex', i)
 				$(currentColumn).data('skinNumber', j)
-				$(currentImage).data('characterNumber', i+1)
-				$(currentImage).data('skinNumber', i)
+				$(currentImage).data('characterIndex', i)
+				$(currentImage).data('skinNumber', j)
 				$(currentColumn).append(currentImage)
 				$(newRow).append(currentColumn)
 			}
@@ -364,6 +364,41 @@ function handleSave () {
 			console.log('Please select at least one character')
 			return;
 		}
+		let characters = []
+		let enabledIndex = 0
+		let charIndex = 0
+		while (charIndex < 76) {
+			if ($(enabledCharacters[enabledIndex]).data('characterIndex') == charIndex) {
+				characters.push(true)
+				enabledIndex += 1
+			} else {
+				characters.push(false)
+			}
+			charIndex += 1
+		}
+
+		// Get set skins
+		let skinsCheck = $('#skinsCheck')
+		let skinsOn
+		let skins = []
+		if (!$(skinsCheck).is(':checked')) {
+			skinsOn = false
+		} else {
+			skinsOn = true
+			for (let i = 0; i < characters.length; i++) {
+				if (characters[i]) {
+					let enabledSkins = $(`#skins${i+1} .img-fluid`).not('.toggled-off')
+					let currentSkins = {
+						character: i,
+						enabled: []
+					}
+					for (let j = 0; j < enabledSkins.length; j++) {
+						currentSkins.enabled.push($(enabledSkins[j]).data('skinNumber'))
+					}
+					skins.push(currentSkins)
+				}
+			}
+		}
 	})
 }
 /*
@@ -372,8 +407,8 @@ let rsetSchema = mongoose.Schema({
 	characters: [Boolean],
 	skinsOn: {type: Boolean},
 	skins: [{
-		character: {type: String},
-		enabled: [Boolean]
+		character: {type: Number},
+		enabled: [Number]
 	}],
 	stages: [Boolean],
 	omegasOn: {type: Boolean},

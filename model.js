@@ -7,8 +7,8 @@ let rsetSchema = mongoose.Schema({
 	characters: [Boolean],
 	skinsOn: {type: Boolean},
 	skins: [{
-		character: {type: String},
-		enabled: [Boolean]
+		character: {type: Number},
+		enabled: [Number]
 	}],
 	stages: [Boolean],
 	omegasOn: {type: Boolean},
