@@ -494,24 +494,6 @@ function handleSave () {
 		console.log(rset)
 	})
 }
-/*
-let rsetSchema = mongoose.Schema({
-	description: {type: String, required: true},
-	characters: [Boolean],
-	skinsOn: {type: Boolean},
-	skins: [{
-		character: {type: Number},
-		enabled: [Number]
-	}],
-	stages: [Boolean],
-	omegasOn: {type: Boolean},
-	omegas: [Boolean],
-	battlefieldsOn: {type: Boolean},
-	battlefields: [Boolean],
-	tags: [String],
-	isPublic: {type: Boolean}
-})
-*/
 
 // Helper functions
 function toggleSkin (number, state) {

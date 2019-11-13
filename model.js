@@ -21,13 +21,16 @@ let rsetSchema = mongoose.Schema({
 
 let userSchema = mongoose.Schema({
 	username: {type: String, required: true},
+	password: {type: String, required: true},
 	rsets: [String]
 })
 
 let Rset = mongoose.model('Rset', setSchema)
 let User = mongoose.model('User', userSchema)
 
-let StudentList = {
+let RsetList = {
+
+	/*
 	get: function(){
 		return Student.find({})
 			.then( students => {
@@ -36,46 +39,12 @@ let StudentList = {
 			.catch( error => {
 				throw Error(error)
 			})
-	},
-	post: function(newStudent) {
-		return Student.create(newStudent)
-			.then(student => {
-				return student;
-			})
-			.catch(error => {
-				throw Error(error)
-			})
-	},
-	findById: function (id) {
-		return Student.findOne({"id": id})
-			.then (students => {
-				return students
-			})
-			.catch ( error => {
-				throw Error(error)
-			})
-	},
-	updateStudent: function (id, firstName, lastName) {
-		return Student.findOneAndUpdate({"id": id}, {$set: {
-			"firstName": firstName,
-			"lastName": lastName
-		}}, {new: true})
-			.then (student => {
-				return student
-			})
-			.catch ( error => {
-				throw Error(error)
-			})
-	},
-	deleteStudent: function (id) {
-		return Student.findOneAndRemove({"id": id})
-			.then( student => {
-				return student
-			})
-			.catch (error => {
-				throw Error(error)
-			})
 	}
+	*/
 }
 
-module.exports = {StudentList}
+let UserList = {
+
+}
+
+module.exports = {RsetList, UserList}
