@@ -11,13 +11,7 @@ app.use(express.static('public'))
 
 let jsonParser = bodyParser.json()
 
-let users = [
-	{
-		username: "test",
-		password: "1234",
-		sets: []
-	}
-]
+let users = []
 
 app.use(morgan('dev'))
 
@@ -59,7 +53,29 @@ app.post('/signup', jsonParser, (req, res, next) => {
 			status: 406
 		})
 	}
-	console.log(username)
+	if (!(password == cpassword)) {
+		res.statusMessage = 'Passwords do not match'
+		return res.status(400).json({
+			message: 'Passwords do not match',
+			status: 400
+		})
+	}
+	for (let i = 0; i < users.length; i++) {
+		if (users[i].username == username) {
+			res.statusMessage = 'Username is taken'
+			return res.status(409).json({
+				message: 'Username is taken',
+				status: 409
+			})
+		}
+	}
+	let newPass = cryptojs.SHA1(password)
+	let newUser = {
+		username: username,
+		password: newPass
+	}
+	users.push(newUser)
+	return res.status(200).json(username)
 })
 
 /* ===== SIGNUP ===== */
@@ -67,10 +83,3 @@ app.post('/signup', jsonParser, (req, res, next) => {
 app.listen(8080, () => {
 	console.log(`App is running on port ${8080}`)
 })
-
-/*
-	let cipherPass = cryptojs.AES.encrypt(password, process.env['ENCRYPT_KEY'])
-	console.log(cipherPass.toString())
-	let uncipherBytes = cryptojs.AES.decrypt(cipherPass, process.env['ENCRYPT_KEY'])
-	let newPass = uncipherBytes.toString(cryptojs.enc.Utf8);
-*/
