@@ -31,7 +31,7 @@ app.post('/login', jsonParser, (req, res, next) => {
 		if (users[i].username == username) {
 			let hash = cryptojs.SHA1(password).toString(cryptojs.enc.Base64)
 			if (users[i].password == hash) {
-				return res.status(200).json(req.body)
+				return res.status(200).json({username: username})
 			}
 		}
 	}
@@ -78,7 +78,7 @@ app.post('/signup', jsonParser, (req, res, next) => {
 		rsets: []
 	}
 	users.push(newUser)
-	return res.status(200).json(username)
+	return res.status(200).json({username: username})
 })
 /* ===== SIGNUP ===== */
 

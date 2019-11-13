@@ -31,6 +31,8 @@ function handleLogin () {
 			method: "POST",
 			success: (responseJSON) => {
 				console.log(responseJSON)
+				localStorage.setItem('currentUser', responseJSON.username)
+				window.location.href = './main.html'
 			},
 			error: (err) => {
 				console.log(err.statusText)
