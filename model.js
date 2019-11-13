@@ -21,10 +21,7 @@ let rsetSchema = mongoose.Schema({
 
 let userSchema = mongoose.Schema({
 	username: {type: String, required: true},
-	password: {
-		words: [Number],
-		sigBytes: Number
-	},
+	password: {type: String, required: true},
 	rsets: [String]
 })
 

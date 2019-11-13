@@ -140,6 +140,31 @@ header .active.nav-link {
 
 /* ===== LOGIN ===== */
 
+/* ===== SIGNUP ===== */
+
+#signup .card {
+	max-width: 30%;
+	min-width: 400px;
+	border-radius: 10px;
+}
+
+#signup .card-title {
+	text-align: center;
+}
+
+#signup .btn-dark {
+	padding-left: 20%;
+	padding-right: 20%;
+}
+
+#signup .container > img{
+	margin: 5% 0% 5% 0%;
+}
+
+/* ===== SIGNUP ===== */
+
+
+
 /* ===== MAIN ===== */
 
 #main #sidebar {

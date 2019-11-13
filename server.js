@@ -2,7 +2,7 @@ require('dotenv').config({path: 'variables.env'})
 let express = require("express")
 let morgan = require("morgan")
 var cryptojs = require("crypto-js");
-//let mongoose = require("mongoose")
+let mongoose = require("mongoose")
 let bodyParser = require('body-parser')
 const PORT = require('./config')
 
@@ -12,6 +12,7 @@ app.use(express.static('public'))
 let jsonParser = bodyParser.json()
 
 let users = []
+let sets = []
 
 app.use(morgan('dev'))
 
@@ -28,7 +29,8 @@ app.post('/login', jsonParser, (req, res, next) => {
 	}
 	for (let i = 0; i < users.length; i++) {
 		if (users[i].username == username) {
-			if (users[i].password == password) {
+			let hash = cryptojs.SHA1(password).toString(cryptojs.enc.Base64)
+			if (users[i].password == hash) {
 				return res.status(200).json(req.body)
 			}
 		}
@@ -69,15 +71,15 @@ app.post('/signup', jsonParser, (req, res, next) => {
 			})
 		}
 	}
-	let newPass = cryptojs.SHA1(password)
+	let newPass = cryptojs.SHA1(password).toString(cryptojs.enc.Base64)
 	let newUser = {
 		username: username,
-		password: newPass
+		password: newPass,
+		rsets: []
 	}
 	users.push(newUser)
 	return res.status(200).json(username)
 })
-
 /* ===== SIGNUP ===== */
 
 app.listen(8080, () => {
