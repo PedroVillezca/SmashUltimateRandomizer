@@ -74,6 +74,11 @@
 	padding: 5px;
 }
 
+.error-text {
+	color: #A31010;
+	font-size: 0.9em;
+}
+
 /* ===== ALL ===== */
 
 /* ===== HEADER ===== */
@@ -236,6 +241,11 @@ header .active.nav-link {
 
 #settings .form-check {
 	margin-bottom: 20px;
+}
+
+#settings .error-text {
+	margin-top: 10px;
+	font-size: 1em;
 }
 
 /* ===== SETTINGS ===== */

@@ -337,6 +337,7 @@ function handleSave () {
 	let setTags = $('.tag-container .badge-primary')
 	let optionPrivate = $('#radioPrivate')
 	let optionPublic = $('#radioPublic')
+	let errorText = $('#settings .error-text')
 	$(saveSet).on('click', (e) => {
 		e.preventDefault()
 
@@ -344,18 +345,21 @@ function handleSave () {
 		if (!$(setTitle).val()) {
 			$(setTitle).addClass('is-invalid')
 			return
+		} else {
+			$(setTitle).removeClass('is-invalid')
 		}
 		let enabledCharacters = $('#characterSelect .img-fluid').not('.toggled-off')
 		if (enabledCharacters.length < 1) {
-			console.log('Please select at least one character')
+			errorText.html('Please select at least one character')
+			errorText.removeClass('unloaded')
 			return
 		}
 		let enabledStages = $('#stageSelect .img-fluid').not('.toggled-off')
 		if (enabledStages.length < 1) {
-			console.log('Please select at least one stage')
+			errorText.html('Please select at least one stage')
+			errorText.removeClass('unloaded')
 			return
 		}
-
 
 		// Get set options
 		let description = $(setTitle).val()
@@ -398,7 +402,8 @@ function handleSave () {
 				if (characters[i]) {
 					let enabledSkins = $(`#skins${i+1} .img-fluid`).not('.toggled-off')
 					if (enabledSkins.length < 1) {
-						console.log('Please make sure all of your characters have at least one skin enabled')
+						errorText.html('Please make sure all of your characters have at least one skin enabled')
+						errorText.removeClass('unloaded')
 						return
 					}
 					let currentSkins = {
@@ -434,10 +439,16 @@ function handleSave () {
 		if (!$(omegasCheck).is(':checked')) {
 			omegasOn = false
 		} else {
+			if (!stages[2]) {
+				errorText.html('To enable Omegas, you must include the Final Destination stage')
+				errorText.removeClass('unloaded')
+				return
+			}
 			omegasOn = true
 			let enabledOmegas = $('#omegaSelect .img-fluid').not('.toggled-off')
 			if (enabledOmegas.length < 1) {
-				console.log('Please select at least one Omega')
+				errorText.html('Please select at least one Omega')
+				errorText.removeClass('unloaded')
 				return
 			}
 			enabledIndex = 0
@@ -460,10 +471,16 @@ function handleSave () {
 		if (!$(battlefieldsCheck).is(':checked')) {
 			battlefieldsOn = false
 		} else {
+			if (!stages[0]) {
+				errorText.html('To enable Battlefields, you must include the Battlefield stage')
+				errorText.removeClass('unloaded')
+				return
+			}
 			battlefieldsOn = true
 			let enabledBattlefields = $('#battlefieldSelect .img-fluid').not('.toggled-off')
 			if (enabledBattlefields.length < 1) {
-				console.log('Please select at least one battlefield')
+				errorText.html('Please select at least one Battlefield')
+				errorText.removeClass('unloaded')
 				return
 			}
 			enabledIndex = 0
@@ -489,9 +506,29 @@ function handleSave () {
 			battlefieldsOn: battlefieldsOn,
 			battlefields: battlefields,
 			tags: tags,
-			isPublic: isPublic
+			isPublic: isPublic,
+			ownedBy: localStorage['currentUser'],
+			downloads: 0,
+			privateLocked: false
 		}
-		console.log(rset)
+		$.ajax({
+			url: '/createSet',
+			dataType: "json",
+			contentType: "application/json",
+			data: JSON.stringify(rset),
+			method: "POST",
+			success: () => {
+				window.location.href = './main.html'
+			},
+			error: (err) => {
+				if (err.status == 409) {
+					errorText.html('You already have a set with the same description')
+				} else {
+					errorText.html('Something went wrong with the server.')
+				}
+				errorText.removeClass('unloaded')
+			}
+		})
 	})
 }
 

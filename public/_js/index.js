@@ -29,13 +29,21 @@ function handleLogin () {
 			contentType: "application/json",
 			data: JSON.stringify(info),
 			method: "POST",
-			success: (responseJSON) => {
-				console.log(responseJSON)
-				localStorage.setItem('currentUser', responseJSON.username)
+			success: (username) => {
+				localStorage.setItem('currentUser', username)
 				window.location.href = './main.html'
 			},
 			error: (err) => {
-				console.log(err.statusText)
+				if (err.statusText == 'Bad user') {
+					userText.addClass('is-invalid')
+				} else {
+					userText.removeClass('is-invalid')
+				}
+				if (err.statusText == 'Bad credentials') {
+					userPass.addClass('is-invalid')
+				} else {
+					userPass.removeClass('is-invalid')
+				}
 			}
 		})
 	})

@@ -1,5 +1,9 @@
 function startUp () {
-	
+	if (localStorage['currentUser']) {
+		// Load the user's sets
+	} else {
+		window.location.href = './index.html'
+	}
 }
 
 

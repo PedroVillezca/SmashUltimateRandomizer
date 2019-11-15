@@ -13,10 +13,6 @@ function handleSignup () {
 		let username = $(userText).val()
 		let password = $(userPass).val()
 		let cpassword = $(userConf).val()
-		if (!username || !password || !cpassword) {
-			console.log('nope')
-			return
-		}
 		let info = {
 			username: username,
 			password: password,
@@ -28,13 +24,22 @@ function handleSignup () {
 			contentType: "application/json",
 			data: JSON.stringify(info),
 			method: "POST",
-			success: (responseJSON) => {
-				console.log(responseJSON)
-				localStorage.setItem('currentUser', responseJSON.username)
+			success: (username) => {
+				localStorage.setItem('currentUser', username)
 				window.location.href = './main.html'
 			},
 			error: (err) => {
-				console.log(err.statusText)
+				let errorText = $('#signup .error-text')
+				if (err.status == 406) {
+					$(errorText).html('Please fill in all fields')
+				} else if (err.status == 400) {
+					$(errorText).html('Passwords do not match')
+				} else if (err.status == 409){
+					$(errorText).html('That username is taken')
+				} else if (err.status == 401) {
+					$(errorText).html('Password must be at least 8 characters long')
+				}
+				errorText.removeClass('unloaded')
 			}
 		})
 	})

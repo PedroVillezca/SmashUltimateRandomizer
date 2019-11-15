@@ -16,35 +16,72 @@ let rsetSchema = mongoose.Schema({
 	battlefieldsOn: {type: Boolean},
 	battlefields: [Boolean],
 	tags: [String],
-	isPublic: {type: Boolean}
-})
+	isPublic: {type: Boolean, required: true},
+	ownedBy: {type: String, required: true},
+	downloads: {type: Number},
+	privateLocked: {type: Boolean, required: true}
+}, {collection: 'rsets'})
 
 let userSchema = mongoose.Schema({
 	username: {type: String, required: true},
 	password: {type: String, required: true},
-	rsets: [String]
-})
+}, {collection: 'users'})
 
-let Rset = mongoose.model('Rset', setSchema)
+let Rset = mongoose.model('Rset', rsetSchema)
 let User = mongoose.model('User', userSchema)
 
 let RsetList = {
-
-	/*
-	get: function(){
-		return Student.find({})
-			.then( students => {
-				return students
+	getAll: function() {
+		return Rset.find({})
+			.then( rsets => {
+				return rsets
 			})
 			.catch( error => {
 				throw Error(error)
 			})
+	},
+	getDesc: function(rset) {
+		return Rset.findOne({
+			"description": rset.description,
+			"ownedBy": rset.ownedBy
+		})
+			.then(rset => {
+				return rset
+			})
+			.catch(error => {
+				throw Error(error)
+			})
+	},
+	create: function(rset) {
+		return Rset.create(rset)
+			.then(rset => {
+				return rset
+			})
+			.catch(error => {
+				throw Error(error)
+			})
 	}
-	*/
 }
 
 let UserList = {
-
+	get: function(username) {
+		return User.findOne({"username": username})
+			.then(user => {
+				return user
+			})
+			.catch(error => {
+				throw Error(error)
+			})
+	},
+	register: function(newUser) {
+		return User.create(newUser)
+			.then(user => {
+				return user
+			})
+			.catch(error => {
+				throw Error(error)
+			})
+	}
 }
 
 module.exports = {RsetList, UserList}
