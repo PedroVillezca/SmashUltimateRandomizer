@@ -147,11 +147,7 @@ app.post('/createSet', jsonParser, (req, res, next) => {
 					status: 409
 				})
 			} else {
-				return true
-			}
-		})
-		.then( () => {
-			RsetList.create(newRset)
+				RsetList.create(newRset)
 				.then(rset => {
 					return res.status(201).json({status: 201})
 				})
@@ -162,6 +158,7 @@ app.post('/createSet', jsonParser, (req, res, next) => {
 						message: 'Something went wrong'
 					})
 				})
+			}
 		})
 		.catch(error => {
 				res.statusMessage = 'Something went wrong'
