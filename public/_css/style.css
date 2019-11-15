@@ -181,6 +181,7 @@ header .active.nav-link {
 #main .card {
 	margin-top: 5px;
  	border-color: #A31010;
+ 	cursor: pointer;
 }
 
 #main img {
