@@ -52,6 +52,15 @@ let RsetList = {
 				throw Error(error)
 			})
 	},
+	getUser: function(username) {
+		return Rset.find({"ownedBy": username})
+			.then(rsets => {
+				return rsets
+			})
+			.catch(error => {
+				throw Error(error)
+			})
+	},
 	create: function(rset) {
 		return Rset.create(rset)
 			.then(rset => {

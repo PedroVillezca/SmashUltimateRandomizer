@@ -118,8 +118,24 @@ app.post('/signup', jsonParser, (req, res, next) => {
 })
 /* ===== SIGNUP ===== */
 
-/* ===== SETTINGS ===== */
+/* ===== MAIN ===== */
+app.get('/mySets', jsonParser, (req, res, next) => {
+	let username = req.query.username
+	RsetList.getUser(username)
+		.then(rsets => {
+			return res.status(200).json(rsets)
+		})
+		.catch(error => {
+			res.statusMessage = 'Something went wrong'
+			return res.status(500).json({
+				status: 500,
+				message: 'Something went wrong'
+			})
+		})
+})
+/* ===== MAIN ===== */
 
+/* ===== SETTINGS ===== */
 app.post('/createSet', jsonParser, (req, res, next) => {
 	let newRset = req.body
 	RsetList.getDesc(newRset)
@@ -155,8 +171,6 @@ app.post('/createSet', jsonParser, (req, res, next) => {
 			})
 		})
 })
-
-
 /* ===== SETTINGS ===== */
 
 let server;
