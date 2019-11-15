@@ -79,6 +79,10 @@
 	font-size: 0.9em;
 }
 
+.privacy-text {
+	margin-top: 10px;
+}
+
 /* ===== ALL ===== */
 
 /* ===== HEADER ===== */
@@ -252,6 +256,59 @@ header .active.nav-link {
 /* ===== SETTINGS ===== */
 
 /* ===== PROFILE ===== */
+#profile #profileContainer {
+	width: 90%;
+	margin-top: 5%;
+	margin-bottom: 20px;
+	padding: 10px 20px;
+	border-radius: 10px;
+}
+
+#profile #profileContainer button {
+	margin-top: 10px;
+	min-width: 25%
+}
+
+
+#profile #profileContainer .col {
+	width: 30%;
+}
+
+
+#profile .card-footer {
+	display: flex;
+	justify-content: space-between;
+}
+
+
+#profile .card-footer img {
+	max-width: 30px;
+	vertical-align: bottom;
+}
+
+#profile .download-number {
+	color: #999999;
+	vertical-align: bottom;
+}
+
+#profile .card-footer button {
+	font-size: 1em;
+	padding: 3px;
+	margin: 0;
+}
+
+#profile .card {
+	margin-top: 10px;
+}
+
+#profile .badge-primary {
+	margin-right: 10px;
+}
+
+#profile .set-buttons button {
+	margin: 0 10px;
+	padding: 5px 20px;
+}
 /* ===== PROFILE ===== */
 
 /* ===== SEARCH ===== */
@@ -293,10 +350,6 @@ header .active.nav-link {
 #search .download-number {
 	color: #999999;
 	vertical-align: bottom;
-}
-
-#search .download-info {
-
 }
 
 #search .card-footer button {
