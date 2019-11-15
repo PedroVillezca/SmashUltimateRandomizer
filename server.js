@@ -170,6 +170,24 @@ app.post('/createSet', jsonParser, (req, res, next) => {
 })
 /* ===== SETTINGS ===== */
 
+/* ===== PROFILE ===== */
+app.delete('/deleteSet', jsonParser, (req, res, next) => {
+	let {ownedBy, description} = req.body
+	RsetList.delete(ownedBy, description)
+		.then(rset => {
+			return res.status(200).json({status: 200})
+		})
+		.catch(error => {
+				res.statusMessage = 'Something went wrong'
+				return res.status(500).json({
+				status: 500,
+				message: 'Something went wrong'
+			})
+		})
+})
+/* ===== PROFILE ===== */
+
+
 let server;
 function runServer (port, databaseUrl) {
 	return new Promise( (resolve, reject) => {

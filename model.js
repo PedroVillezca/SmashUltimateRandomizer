@@ -69,6 +69,15 @@ let RsetList = {
 			.catch(error => {
 				throw Error(error)
 			})
+	},
+	delete: function(username, description) {
+		return Rset.findOneAndRemove({ownedBy: username, description: description})
+			.then(rset => {
+				return rset
+			})
+			.catch(error => {
+				throw Error(error)
+			})
 	}
 }
 

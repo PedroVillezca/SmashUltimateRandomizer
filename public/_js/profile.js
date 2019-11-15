@@ -20,6 +20,7 @@ function getSets () {
 	})
 		.then( () => {
 			loadSets(userSets)
+			handleRemove()
 		})
 }
 
@@ -68,6 +69,32 @@ function loadSets (userSets) {
 		$(setContainer).append(currentCard)
 	}
 
+}
+
+function handleRemove () {
+	let removeButtons = $('#profile .remove-button')
+	for (let i = 0; i < removeButtons.length; i++) {
+		$(removeButtons[i]).on('click', (e) => {
+			let info = {
+				ownedBy: $(removeButtons[i]).data('rset').ownedBy,
+				description: $(removeButtons[i]).data('rset').description
+			}
+			$.ajax({
+				url: '/deleteSet',
+				dataType: "json",
+				contentType: "application/json",
+				data: JSON.stringify(info),
+				method: "DELETE",
+				success: () => {
+					let parentCard = $(`#${$(removeButtons[i]).data('parentId')}`)
+					$(parentCard).remove()
+				},
+				error: (err) => {
+					console.log(err.statusMessage)
+				}
+			})
+		})
+	}
 }
 
 function changeTitle () {
