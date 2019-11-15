@@ -1,4 +1,18 @@
 let userSets
+/* ===== CURRENT SET ===== */
+// Arrays
+let characters
+let skins
+let stages
+let omegas
+let battlefields
+
+
+// Variables
+let skinsOn
+let OmegasOn
+let battlefieldsOn
+/* ===== CURRENT SET ===== */
 
 function startUp () {
 	if (!localStorage['currentUser']) {
@@ -22,6 +36,7 @@ function getSets () {
 	})
 		.then( () => {
 			loadSets(userSets)
+			handleSets()
 		})
 }
 
@@ -38,7 +53,45 @@ function loadSets (userSets) {
 		currentCard.data('rset', userSets[i])
 		$(sidebar).append(currentCard)
 	}
+	chooseSet(userSets[0])
 }
+
+function handleSets () {
+	let sets = $('#sidebar .card')
+	for (let i = 0; i < sets.length; i++) {
+		$(sets[i]).on('click', (e) => {
+			e.preventDefault()
+			chooseSet($(sets[i]).data('rset'))
+		})
+	}
+}
+
+function chooseSet (rset) {
+	characters = rset.characters
+	skinsOn = rset.skinsOn
+	if (skinsOn) {
+		skins = rset.skins
+	} else {
+		skins = []
+	}
+	stages = rset.stages
+	omegasOn = rset.omegasOn
+	if (omegasOn) {
+		omegas = rset.omegas
+	} else {
+		omegas = []
+	}
+	battlefieldsOn = rset.battlefieldsOn
+	if (battlefieldsOn) {
+		battlefields = rset.battlefields
+	} else {
+		battlefields = []
+	}
+	let currentTitle = $('#main .current-set-title')
+	currentTitle.html(rset.description)
+}
+
+
 console.log('Main page startup')
 startUp()
 console.log('Main page loaded')
