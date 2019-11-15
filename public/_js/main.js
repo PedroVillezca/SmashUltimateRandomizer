@@ -128,9 +128,42 @@ function randomize () {
 		}
 	}
 
+	let varText = 'Normal'
+	let enabledStages = []
+	for (let i = 0; i < stages.length; i++) {
+		if (stages[i]) {
+			enabledStages.push(i)
+		}
+	}
+	let selectedStage = enabledStages[randomIntFromInterval(0, enabledStages.length-1)]+1
+	if (selectedStage-1 == 0 && battlefieldsOn) {
+		varText = 'Battlefield'
+		let enabledBattlefields = []
+		for (let i = 0; i < battlefields.length; i++) {
+			if (battlefields[i]) {
+				enabledBattlefields.push(i)
+			}
+		}
+		selectedStage = enabledBattlefields[randomIntFromInterval(0, enabledBattlefields.length-1)]+1
+	} else if (selectedStage-1 == 2 && omegasOn){
+		varText = 'Omega'
+		let enabledOmegas = []
+		for (let i = 0; i < omegas.length; i++) {
+			if (omegas[i]) {
+				enabledOmegas.push(i)
+			}
+		}
+		selectedStage = enabledOmegas[randomIntFromInterval(0, enabledOmegas.length-1)]+1
+	}
+
+
 	// Display results
 	let characterImg = $('#characterImg')
 	$(characterImg).attr('src', `./_assets/_renders/${selectedCharacter}/0${selectedSkin}.png`)
+	let stageImg = $('#stageImg')
+	$(stageImg).attr('src', `./_assets/_stages/stage_img${selectedStage}.jpg`)
+	let variationText = $('#variationText')
+	variationText.html(varText)
 }
 
 function randomIntFromInterval(min, max) {
