@@ -20,6 +20,7 @@ function getSets () {
 	})
 		.then( () => {
 			loadSets(userSets)
+			handleEdit()
 			handleRemove()
 		})
 }
@@ -93,6 +94,18 @@ function handleRemove () {
 					console.log(err.statusMessage)
 				}
 			})
+		})
+	}
+}
+
+function handleEdit () {
+	let editButtons = $('#profile .edit-button')
+	for (let i = 0; i < editButtons.length; i++) {
+		$(editButtons[i]).on('click', (e) => {
+			localStorage.setItem('editMode', true)
+			let currentRset = $(editButtons[i]).data('rset')
+			localStorage.setItem('currentRset', JSON.stringify(currentRset))
+			window.location.href = './settings.html'
 		})
 	}
 }

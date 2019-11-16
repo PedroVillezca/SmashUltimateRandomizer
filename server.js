@@ -168,6 +168,21 @@ app.post('/createSet', jsonParser, (req, res, next) => {
 			})
 		})
 })
+
+app.put('/editSet', jsonParser, (req, res, next) => {
+	let toUpdate = req.body
+	RsetList.edit(toUpdate)
+		.then(rset => {
+			return res.status(200).json({status: 200})
+		})
+		.catch(error => {
+				res.statusMessage = 'Something went wrong'
+				return res.status(500).json({
+				status: 500,
+				message: 'Something went wrong'
+			})
+		})
+})
 /* ===== SETTINGS ===== */
 
 /* ===== PROFILE ===== */

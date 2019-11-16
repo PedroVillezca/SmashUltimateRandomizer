@@ -78,6 +78,15 @@ let RsetList = {
 			.catch(error => {
 				throw Error(error)
 			})
+	},
+	edit: function(rset) {
+		return Rset.findOneAndUpdate({_id: rset._id}, rset, {new: true})
+			.then(rset => {
+				return rset
+			})
+			.catch(error => {
+				throw Error(error)
+			})
 	}
 }
 

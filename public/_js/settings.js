@@ -12,8 +12,18 @@ let toggleCharacters = true
 let toggleStages = true
 let toggleOmegas = true
 let toggleBattlefields = true
+let mode
 
 function startUp () {
+	if (localStorage['editMode']) {
+		mode = 'edit'
+		localStorage.removeItem('editMode')
+	} else if (localStorage['downloadMode']) {
+		mode = 'download'
+		localStorage.removeItem('downloadMode')
+	} else {
+		mode = 'save'
+	}
 	loadCharacters()
 	handleCharacters()
 	loadStages()
@@ -24,7 +34,11 @@ function startUp () {
 	handleOmegas()
 	loadBattlefields()
 	handleBattlefields()
+	loadTags()
 	handleTags()
+	if (mode != 'save') {
+		setOptions()
+	}
 	handleSave()
 }
 
@@ -322,6 +336,13 @@ function handleBattlefields () {
 	})
 }
 
+function loadTags () {
+	let tags = $('.tag-container .badge-primary')
+	for (let i = 0; i < tags.length; i++) {
+		$(tags[i]).addClass('toggled-off')
+	}
+}
+
 function handleTags () {
 	let tags = $('.tag-container .badge-primary')
 	for (let i = 0; i < tags.length; i++) {
@@ -511,25 +532,167 @@ function handleSave () {
 			downloads: 0,
 			privateLocked: false
 		}
-		$.ajax({
-			url: '/createSet',
-			dataType: "json",
-			contentType: "application/json",
-			data: JSON.stringify(rset),
-			method: "POST",
-			success: () => {
-				window.location.href = './main.html'
-			},
-			error: (err) => {
-				if (err.status == 409) {
-					errorText.html('You already have a set with the same description')
-				} else {
-					errorText.html('Something went wrong with the server.')
+		if (mode == 'save') {
+			$.ajax({
+				url: '/createSet',
+				dataType: "json",
+				contentType: "application/json",
+				data: JSON.stringify(rset),
+				method: "POST",
+				success: () => {
+					window.location.href = './main.html'
+				},
+				error: (err) => {
+					if (err.status == 409) {
+						errorText.html('You already have a set with the same description')
+					} else {
+						errorText.html('Something went wrong with the server.')
+					}
+					errorText.removeClass('unloaded')
 				}
-				errorText.removeClass('unloaded')
-			}
-		})
+			})
+		} else if (mode == 'edit') {
+			rset._id = JSON.parse(localStorage['currentRset'])._id
+			$.ajax({
+				url: '/editSet',
+				dataType: "json",
+				contentType: "application/json",
+				data: JSON.stringify(rset),
+				method: "PUT",
+				success: () => {
+					localStorage.removeItem('currentRset')
+					window.location.href = './profile.html'
+				},
+				error: (err) => {
+					errorText.html('Something went wrong with the server.')
+					errorText.removeClass('unloaded')
+				}
+			})
+		}
 	})
+}
+
+// Premade rset functions
+function setOptions () {
+	let rset = JSON.parse(localStorage['currentRset'])
+	setCharacters(rset.characters)
+	if (rset.skinsOn) {
+		setSkins(rset.skins)
+	}
+	setStages(rset.stages)
+	if (rset.omegasOn) {
+		setOmegas(rset.omegas)
+	}
+	if (rset.battlefieldsOn) {
+		setBattlefields(rset.battlefields)
+	}
+	setTags(rset.tags)
+	setRestrictions(rset)
+}
+
+function setCharacters (characters) {
+	let characterImages = $('#characterSelect .img-fluid')
+	for (let i = 0; i < characterImages.length; i++) {
+		if (!characters[i]) {
+			$(characterImages[i]).addClass('toggled-off')
+			toggleSkin(i+1, false)
+		}
+	}
+}
+
+function setSkins (skins) {
+	for (let i = 0; i < skins.length; i++) {
+		let enabledIndex = 0
+		let skinImages = $(`#skins${skins[i].character+1} .img-fluid`)
+		for (let j = 0; j < skinImages.length; j++) {
+			if (enabledIndex < skins[i].enabled.length) {
+				if (skins[i].enabled[enabledIndex] == j+1) {
+					enabledIndex += 1
+				} else {
+					$(skinImages[j]).addClass('toggled-off')
+				}
+			} else {
+				$(skinImages[j]).addClass('toggled-off')
+			}
+		}
+	}
+}
+
+function setStages (stages) {
+	let stageImages = $('#stageSelect .img-fluid')
+	for (let i = 0; i < stageImages.length; i++) {
+		if (!stages[i]) {
+			$(stageImages[i]).addClass('toggled-off')
+		}
+	}
+}
+
+function setOmegas (omegas) {
+	let omegaImages = $('#omegaSelect .img-fluid')
+	for (let i = 0; i < omegaImages.length; i++) {
+		if (!omegas[i]) {
+			$(omegaImages[i]).addClass('toggled-off')
+		}
+	}
+}
+
+function setBattlefields (battlefields) {
+	let battlefieldImages = $('#battlefieldSelect .img-fluid')
+	for (let i = 0; i < battlefieldImages.length; i++) {
+		if (!battlefields[i]) {
+			$(battlefieldImages[i]).addClass('toggled-off')
+		}
+	}
+}
+
+function setTags (tags) {
+	let tagBadges = $('.tag-container .badge-primary')
+	let tagIndex = 0
+	for (let i = 0; i < tagBadges.length; i++) {
+		if (tagIndex < tags.length) {
+			if ($(tagBadges[i]).html() == tags[tagIndex]) {
+				$(tagBadges[i]).removeClass('toggled-off')
+				tagIndex += 1
+			}
+		}
+	}
+}
+
+function setRestrictions (rset) {
+	let setTitle = $('#setTitle')
+	setTitle.val(rset.description)
+
+	let optionPrivate = $('#radioPrivate')
+	let optionPublic = $('#radioPublic')
+	if (rset.isPublic) {
+		$(optionPrivate).attr('checked', false)
+		$(optionPublic).attr('checked', true)
+	} else {
+		$(optionPrivate).attr('checked', true)
+		$(optionPublic).attr('checked', false)
+	}
+
+	if (rset.skinsOn) {
+		let skinsCheck = $('#skinsCheck')
+		let skinSelect = $('#skinSelect')
+		$(skinsCheck).attr('checked', true)
+		$(skinSelect).removeClass('unloaded')
+	}
+	if (rset.omegasOn) {
+		let omegasCheck = $('#omegasCheck')
+		let omegaSelect = $('#omegaSelect')
+		$(omegasCheck).attr('checked', true)
+		$(omegaSelect).removeClass('unloaded')
+	}
+	if (rset.battlefieldsOn) {
+		let omegasCheck = $('#battlefieldsCheck')
+		let omegaSelect = $('#battlefieldSelect')
+		$(battlefieldsCheck).attr('checked', true)
+		$(battlefieldSelect).removeClass('unloaded')
+	}
+	if (mode == 'download') {
+		// Lock into private settings
+	}
 }
 
 // Helper functions
