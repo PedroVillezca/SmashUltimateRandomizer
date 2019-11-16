@@ -185,6 +185,39 @@ app.put('/editSet', jsonParser, (req, res, next) => {
 })
 /* ===== SETTINGS ===== */
 
+/* ===== SEARCH ===== */
+app.get('/searchSets', jsonParser, (req, res, next) => {
+	let hasTags = req.query.tags.split(',')
+	let useTags = req.query.useTags
+	if (useTags != 'false') {
+		RsetList.search(hasTags)
+			.then(rsets => {
+				console.log('searched by tags')
+				return res.status(200).json(rsets)
+			})
+			.catch(error => {
+					res.statusMessage = 'Something went wrong'
+					return res.status(500).json({
+					status: 500,
+					message: 'Something went wrong'
+				})
+			})
+	} else {
+		RsetList.getPublic()
+			.then(rsets => {
+				return res.status(200).json(rsets)
+			})
+			.catch(error => {
+					res.statusMessage = 'Something went wrong'
+					return res.status(500).json({
+					status: 500,
+					message: 'Something went wrong'
+				})
+			})
+	}
+})
+/* ===== SEARCH ===== */
+
 /* ===== PROFILE ===== */
 app.delete('/deleteSet', jsonParser, (req, res, next) => {
 	let {ownedBy, description} = req.body

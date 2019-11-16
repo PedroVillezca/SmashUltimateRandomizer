@@ -61,6 +61,15 @@ let RsetList = {
 				throw Error(error)
 			})
 	},
+	getPublic: function() {
+		return Rset.find({isPublic: true}).sort({downloads: -1}).limit(30)
+			.then(rsets => {
+				return rsets
+			})
+			.catch(error => {
+				throw Error(error)
+			})
+	},
 	create: function(rset) {
 		return Rset.create(rset)
 			.then(rset => {
@@ -83,6 +92,15 @@ let RsetList = {
 		return Rset.findOneAndUpdate({_id: rset._id}, rset, {new: true})
 			.then(rset => {
 				return rset
+			})
+			.catch(error => {
+				throw Error(error)
+			})
+	},
+	search: function(hasTags) {
+		return Rset.find({isPublic: true, tags: {$all: hasTags}}).sort({downloads: -1}).limit(30)
+			.then(rsets => {
+				return rsets
 			})
 			.catch(error => {
 				throw Error(error)

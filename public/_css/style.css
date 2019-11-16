@@ -361,6 +361,14 @@ header .active.nav-link {
 #search .card {
 	margin-top: 10px;
 }
+
+#search .badge-primary {
+	margin-right: 10px;
+}
+
+#search .error-text {
+	margin-top: 10px;
+}
 /* ===== SEARCH ===== */
 
 /* ===== METRICS ===== */
