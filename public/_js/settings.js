@@ -554,6 +554,7 @@ function handleSave () {
 		} else if (mode == 'edit') {
 			rset._id = JSON.parse(localStorage['currentRset'])._id
 			rset.downloads = JSON.parse(localStorage['currentRset']).downloads
+			rset.privateLocked = JSON.parse(localStorage['currentRset']).privateLocked
 			$.ajax({
 				url: '/editSet',
 				dataType: "json",
@@ -569,10 +570,47 @@ function handleSave () {
 					errorText.removeClass('unloaded')
 				}
 			})
+		} else {
+			rset.privateLocked = true
+			$.ajax({
+				url: '/createSet',
+				dataType: "json",
+				contentType: "application/json",
+				data: JSON.stringify(rset),
+				method: "POST",
+				success: () => {},
+				error: (err) => {
+					if (err.status == 409) {
+						errorText.html('You already have a set with the same description')
+					} else {
+						errorText.html('Something went wrong with the server.')
+					}
+					errorText.removeClass('unloaded')
+				}
+			}).done(updateOriginal)
 		}
 	})
 }
 
+function updateOriginal () {
+	let existingRset = JSON.parse(localStorage['currentRset'])
+	existingRset.downloads = existingRset.downloads + 1
+	console.log(existingRset)
+	$.ajax({
+		url: '/editSet',
+		dataType: "json",
+		contentType: "application/json",
+		data: JSON.stringify(existingRset),
+		method: "PUT",
+		success: () => {
+			localStorage.removeItem('currentRset')
+			window.location.href = './profile.html'
+		},
+		error: (err) => {
+			console.log(err.statusMessage)
+		}
+	})
+}
 // Premade rset functions
 function setOptions () {
 	let rset = JSON.parse(localStorage['currentRset'])

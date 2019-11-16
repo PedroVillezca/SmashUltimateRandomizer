@@ -171,6 +171,9 @@ app.post('/createSet', jsonParser, (req, res, next) => {
 
 app.put('/editSet', jsonParser, (req, res, next) => {
 	let toUpdate = req.body
+	console.log('at least it tried?')
+	console.log(toUpdate.description)
+	console.log(toUpdate.downloads)
 	RsetList.edit(toUpdate)
 		.then(rset => {
 			return res.status(200).json({status: 200})

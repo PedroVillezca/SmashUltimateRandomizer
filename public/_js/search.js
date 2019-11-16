@@ -106,6 +106,7 @@ function handleSearch () {
 		})
 			.then( () => {
 				handleResults(searchResults)
+				handleDownload()
 			})
 	})
 }
@@ -199,6 +200,9 @@ function loadResults (results) {
 			$(currentTags).append(`<span class="badge badge-primary">${results[i].tags[j]}</span>`)
 		}
 		$(currentCardBody).append(currentTags)
+		if (localStorage['currentUser'] == results[i].ownedBy) {
+			$(currentCardBody).append(`<p class="card-text privacy-text">This set already belongs to you, so you can't save it.</p>`)
+		}
 		$(currentCard).append(currentCardBody)
 		let currentCardFooter = $(`<div class="card-footer">
 									<span class="download-info">
@@ -211,6 +215,20 @@ function loadResults (results) {
 		$(currentCardFooter).append(currentCardButton)
 		$(currentCard).append(currentCardFooter)
 		$(setContainer).append(currentCard)
+	}
+}
+
+function handleDownload() {
+	let saveButtons = $('#search .save-button')
+	for (let i = 0; i < saveButtons.length; i++) {
+		$(saveButtons[i]).on('click', (e) => {
+			let currentRset = $(saveButtons[i]).data('rset')
+			if (currentRset.ownedBy != localStorage['currentUser']) {
+				localStorage.setItem('downloadMode', true)
+				localStorage.setItem('currentRset', JSON.stringify(currentRset))
+				window.open('./settings.html', '_blank')
+			}
+		})
 	}
 }
 
