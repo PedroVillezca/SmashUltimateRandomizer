@@ -553,6 +553,7 @@ function handleSave () {
 			})
 		} else if (mode == 'edit') {
 			rset._id = JSON.parse(localStorage['currentRset'])._id
+			rset.downloads = JSON.parse(localStorage['currentRset']).downloads
 			$.ajax({
 				url: '/editSet',
 				dataType: "json",
@@ -690,8 +691,11 @@ function setRestrictions (rset) {
 		$(battlefieldsCheck).attr('checked', true)
 		$(battlefieldSelect).removeClass('unloaded')
 	}
-	if (mode == 'download') {
-		// Lock into private settings
+	if (mode == 'download' || rset.privateLocked) {
+		$(optionPrivate).attr('checked', true)
+		$(optionPublic).attr('checked', false)
+		$(optionPrivate).attr('disabled', true)
+		$(optionPublic).attr('disabled', true)
 	}
 }
 
