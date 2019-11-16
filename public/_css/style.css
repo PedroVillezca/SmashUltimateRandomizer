@@ -371,8 +371,18 @@ header .active.nav-link {
 }
 /* ===== SEARCH ===== */
 
-/* ===== METRICS ===== */
-/* ===== METRICS ===== */
+/* ===== INFO ===== */
+
+#info content .container-fluid {
+	margin-top: 30px;
+	width: 95%;
+}
+
+#info h1 {
+	margin: 10px 0px;
+}
+
+/* ===== INFO ===== */
 
 /* ===== MEDIA QUERIES ===== */
 
