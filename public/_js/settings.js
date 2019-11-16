@@ -422,7 +422,7 @@ function handleSave () {
 			for (let i = 0; i < characters.length; i++) {
 				if (characters[i]) {
 					let enabledSkins = $(`#skins${i+1} .img-fluid`).not('.toggled-off')
-					if (enabledSkins.length < 1) {
+					if (enabledSkins.length < 1 && i != 53 && i != 54 && i != 55) {
 						errorText.html('Please make sure all of your characters have at least one skin enabled')
 						errorText.removeClass('unloaded')
 						return

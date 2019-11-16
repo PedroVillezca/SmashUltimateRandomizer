@@ -120,7 +120,7 @@ function randomize () {
 	let characterIndex = enabledCharacters[randomIntFromInterval(0, enabledCharacters.length-1)]
 	let selectedCharacter = characterFolders[characterIndex]
 	let selectedSkin = 1
-	if (skinsOn) {
+	if (skinsOn && characterIndex != 53 && characterIndex != 54 && characterIndex != 55) {
 		for (let i = 0; i < skins.length; i++) {
 			if (skins[i].character == characterIndex) {
 				selectedSkin = skins[i].enabled[randomIntFromInterval(0, skins[i].enabled.length-1)]
