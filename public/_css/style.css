@@ -209,6 +209,10 @@ header .active.nav-link {
 	margin-bottom: 30px;
 }
 
+#main #emptyText {
+	margin-top: 10px;
+}
+
 /* ===== MAIN ===== */
 
 /* ===== SETTINGS ===== */

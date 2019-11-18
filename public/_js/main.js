@@ -53,6 +53,12 @@ function getSets () {
 
 function loadSets (userSets) {
 	let sidebar = $('#sidebar')
+	let emptyMessage = $('#emptyText')
+	if (userSets.length == 0) {
+		emptyMessage.removeClass('unloaded')
+	} else {
+		emptyMessage.addClass('unloaded')
+	}
 	for (let i = 0; i < userSets.length; i++){
 		let currentCard = $(`<div class="card text-center" id="rset${i}">
 								<div class="card-body">

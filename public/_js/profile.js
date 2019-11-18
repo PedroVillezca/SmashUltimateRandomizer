@@ -27,6 +27,12 @@ function getSets () {
 
 function loadSets (userSets) {
 	let setContainer = $('#profile #setContainer')
+	let emptyProfile = $('#profile #emptyProfile')
+	if (userSets.length == 0) {
+		emptyProfile.removeClass('unloaded')
+	} else {
+		emptyProfile.addClass('unloaded')
+	}
 	for (let i = 0; i < userSets.length; i++) {
 		let currentCard = $(`<div class="card" id="setCard${i}"></div>`)
 		let currentCardBody = $(`<div class="card-body text-left">
