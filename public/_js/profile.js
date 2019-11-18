@@ -1,6 +1,9 @@
 let userSets
 
 function startUp () {
+	if (!localStorage['currentUser']) {
+		window.location.href = './index.html'
+	}
 	changeTitle()
 	getSets()
 }

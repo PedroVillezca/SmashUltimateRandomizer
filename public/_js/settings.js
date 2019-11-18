@@ -15,6 +15,9 @@ let toggleBattlefields = true
 let mode
 
 function startUp () {
+	if (!localStorage['currentUser']) {
+		window.location.href = './index.html'
+	}
 	if (localStorage['editMode']) {
 		mode = 'edit'
 		localStorage.removeItem('editMode')

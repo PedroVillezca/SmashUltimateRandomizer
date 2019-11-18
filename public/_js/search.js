@@ -61,6 +61,9 @@ let characterMap = new Map()
 let stageMap = new Map()
 
 function startUp () {
+	if (!localStorage['currentUser']) {
+		window.location.href = './index.html'
+	}
 	makeCharacterMap()
 	makeStageMap()
 	handleTags()
