@@ -53,7 +53,7 @@ function loadCharacters () {
 	let newRow = $(`<div class="row"></div>`)
 	for (let i = 0; i < characterFolders.length; i++) {
 		let currentColumn = $(`<div class="col img-thumbnail"></div>`)
-		let currentImage = $(`<img class="img-fluid" src="https://s3.amazonaws.com/smashassets/_assets/_renders/${characterFolders[i]}/01.png">`)
+		let currentImage = $(`<img class="img-fluid" src="https://s3.amazonaws.com/smashassets/_smallassets/_renders/${characterFolders[i]}/01.png">`)
 		$(currentColumn).data('characterIndex', i)
 		$(currentImage).data('characterIndex', i)
 		$(currentColumn).append(currentImage)
@@ -78,7 +78,7 @@ function loadStages () {
 	let newRow = $(`<div class="row"></div>`)
 	for (let i = 1; i < 104; i++) {
 		let currentColumn = $(`<div class="col img-thumbnail"></div>`)
-		let currentImage = $(`<img class="img-fluid" src="https://s3.amazonaws.com/smashassets/_assets/_stages/stage_img${i}.jpg">`)
+		let currentImage = $(`<img class="img-fluid" src="https://s3.amazonaws.com/smashassets/_smallassets/_stages/stage_img${i}.jpg">`)
 		$(currentColumn).data('stageNumber', i)
 		$(currentImage).data('stageNumber', i)
 		$(currentColumn).append(currentImage)
@@ -104,7 +104,7 @@ function loadSkins () {
 		if (characterFolders[i] != '51' && characterFolders[i] != '52' && characterFolders[i] != '53') {
 			for (let j = 1; j <= 8; j++) {
 				let currentColumn = $(`<div class="col img-thumbnail"></div>`)
-				let currentImage = $(`<img class="img-fluid" src="https://s3.amazonaws.com/smashassets/_assets/_renders/${characterFolders[i]}/0${j}.png">`)
+				let currentImage = $(`<img class="img-fluid" src="https://s3.amazonaws.com/smashassets/_smallassets/_renders/${characterFolders[i]}/0${j}.png">`)
 				$(currentColumn).data('characterIndex', i)
 				$(currentColumn).data('skinNumber', j)
 				$(currentImage).data('characterIndex', i)
@@ -123,7 +123,7 @@ function loadOmegas () {
 	let newRow = $(`<div class="row"></div>`)
 	for (let i = 1; i < 104; i++) {
 		let currentColumn = $(`<div class="col img-thumbnail"></div>`)
-		let currentImage = $(`<img class="img-fluid" src="https://s3.amazonaws.com/smashassets/_assets/_stages/stage_img${i}.jpg">`)
+		let currentImage = $(`<img class="img-fluid" src="https://s3.amazonaws.com/smashassets/_smallassets/_stages/stage_img${i}.jpg">`)
 		$(currentColumn).data('omegaNumber', i)
 		$(currentImage).data('omegaNumber', i)
 		$(currentColumn).append(currentImage)
@@ -148,7 +148,7 @@ function loadBattlefields () {
 	let newRow = $(`<div class="row"></div>`)
 	for (let i = 1; i < 104; i++) {
 		let currentColumn = $(`<div class="col img-thumbnail"></div>`)
-		let currentImage = $(`<img class="img-fluid" src="https://s3.amazonaws.com/smashassets/_assets/_stages/stage_img${i}.jpg">`)
+		let currentImage = $(`<img class="img-fluid" src="https://s3.amazonaws.com/smashassets/_smallassets/_stages/stage_img${i}.jpg">`)
 		$(currentColumn).data('battlefieldNumber', i)
 		$(currentImage).data('battlefieldNumber', i)
 		$(currentColumn).append(currentImage)
