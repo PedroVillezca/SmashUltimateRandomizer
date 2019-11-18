@@ -83,6 +83,10 @@
 	margin-top: 10px;
 }
 
+.background-black {
+	background-color: black;
+}
+
 /* ===== ALL ===== */
 
 /* ===== HEADER ===== */
@@ -94,6 +98,18 @@ header #headerBg {
 header #logoWhite {
 	max-width: 150px;
 	margin-top: 5px;
+}
+
+header #logoutButton {
+	max-width: 40px;
+	opacity: 0.5;
+	margin-top: 15%;
+	margin-left: 10px;
+}
+
+header #logoutButton:hover {
+	opacity: 1;
+	cursor: pointer;
 }
 
 header .navbar {
