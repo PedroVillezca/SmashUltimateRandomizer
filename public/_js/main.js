@@ -165,9 +165,9 @@ function randomize () {
 
 	// Display results
 	let characterImg = $('#characterImg')
-	$(characterImg).attr('src', `https://s3.amazonaws.com/smashassets/_assets/_renders/${selectedCharacter}/0${selectedSkin}.png`)
+	$(characterImg).attr('src', `https://s3.amazonaws.com/smashassets/_smallassets/_renders/${selectedCharacter}/0${selectedSkin}.png`)
 	let stageImg = $('#stageImg')
-	$(stageImg).attr('src', `https://s3.amazonaws.com/smashassets/_assets/_stages/stage_img${selectedStage}.jpg`)
+	$(stageImg).attr('src', `https://s3.amazonaws.com/smashassets/_smallassets/_stages/stage_img${selectedStage}.jpg`)
 	let variationText = $('#variationText')
 	variationText.html(varText)
 }
