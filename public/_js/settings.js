@@ -1,3 +1,62 @@
+let characterNames = ["Mario", "Donkey Kong", "Link", "Samus",
+					  "Dark Samus", "Yoshi", "Kirby", "Fox",
+					  "Pikachu", "Luigi", "Ness", "Captain Falcon",
+					  "Jigglypuff", "Peach", "Daisy", "Bowser",
+					  "Ice Climbers", "Sheik", "Zelda", "Dr. Mario",
+					  "Pichu", "Falco", "Marth", "Lucina", "Young Link",
+					  "Ganondorf", "Mewtwo", "Roy", "Chrom",
+					  "Mr. Game & Watch", "Meta Knight", "Pit",
+					  "Dark Pit", "Zero Suit Samus", "Wario", "Snake",
+					  "Ike", "Pokemon Trainer", "Diddy Kong", "Lucas",
+					  "Sonic", "King Dedede", "Olimar", "Lucario",
+					  "R.O.B.", "Toon Link", "Wolf", "Villager",
+					  "Mega Man", "Wii Fit Trainer", "Rosalina & Luma",
+					  "Little Mac", "Greninja", "Mii Brawler",
+					  "Mii Swordfighter", "Mii Gunner", "Palutena",
+					  "PAC-MAN", "Robin", "Shulk", "Bowser Jr.",
+					  "Duck Hunt", "Ryu", "Ken", "Cloud", "Corrin",
+					  "Bayonetta", "Inkling", "Ridley", "Simon",
+					  "Richter", "King K. Rool", "Isabelle", "Incineroar",
+					  "Piranha Plant", "Joker"]
+
+let stageNames = ["Battlefield", "Big Battlefield", "Final Destination",
+				  "Peach's Castle", "Kongo Jungle", "Hyrule Castle",
+				  "Super Happy Tree", "Dreamland", "Saffron City",
+				  "Mushroom Kingdom", "Princess Peach's Castle",
+				  "Rainbow Cruise", "Kongo Falls", "Jungle Japes",
+				  "Great Bay", "Temple", "Brinstar",
+				  "Yoshi's Island (Melee)", "Yoshi's Story",
+				  "Fountain of Dreams", "Green Greens", "Corneria",
+				  "Venom", "Pokemon Stadium", "Onett",
+				  "Mushroom Kingdom II", "Brinstar Depths", "Big Blue",
+				  "Fourside", "Delfino Plaza", "Mushroomy Kingdom",
+				  "Figure-8 Circuit", "WarioWare, Inc.",
+				  "Bridge of Eldin", "Norfair", "Frigate Orpheon",
+				  "Yoshi's Island", "Halberd", "Lylat Cruise",
+				  "Pokemon Stadium 2", "Port Town Aero Dive",
+				  "Castle Siege", "Distant Planet", "Smashville",
+				  "New Pork City", "Summit", "Skyworld",
+				  "Shadow Moses Island", "Luigi's Mansion",
+				  "Pirate Ship", "Spear Pillar", "75 m", "Mario Bros.",
+				  "Hanenbow", "Green Hill Zone", "3D Land",
+				  "Golden Plains", "Paper Mario", "Gerudo Valley",
+				  "Spirit Train", "Dream Land GB",
+				  "Unova Pokemon League", "Prism Tower", "Mute City SNES",
+				  "Magicant", "Arena Ferox", "Reset Bomb Forest",
+				  "Tortimer Island", "Balloon Fight", "Living Room",
+				  "Find Mii", "Tomodachi Life", "PictoChat 2",
+				  "Mushroom Kingdom U", "Mario Galaxy", "Mario Circuit",
+				  "Skyloft", "The Great Cave Offensive",
+				  "Kalos Pokemon League", "Coliseum", "Flat Zone X",
+				  "Palutena's Temple", "Gamer", "Garden of Hope",
+				  "Town and City", "Wii Fit Studio", "Boxing Ring",
+				  "Gaur Plain", "Duck Hunt", "Wrecking Crew",
+				  "Pilotwings", "Wuhu Island", "Windy Hill Zone",
+				  "Wily Castle", "PAC-LAND", "Super Mario Maker",
+				  "Suzaku Castle", "Midgar", "Umbra Clock Tower",
+				  "New Donk City Hall", "Great Plateau Tower",
+				  "Moray Towers", "Dracula's Castle"]
+
 let characterFolders = ["01", "02", "03", "04", "04e", "05", "06", "07", 
 						"08", "09", "10", "11", "12", "13", "13e", "14",
 						"15", "16", "17", "18", "19", "20", "21", "21e",
@@ -53,7 +112,7 @@ function loadCharacters () {
 	let newRow = $(`<div class="row"></div>`)
 	for (let i = 0; i < characterFolders.length; i++) {
 		let currentColumn = $(`<div class="col img-thumbnail"></div>`)
-		let currentImage = $(`<img class="img-fluid" src="https://s3.amazonaws.com/smashassets/_smallassets/_renders/${characterFolders[i]}/01.png">`)
+		let currentImage = $(`<img class="img-fluid" alt="${characterNames[i]}" src="https://s3.amazonaws.com/smashassets/_smallassets/_renders/${characterFolders[i]}/01.png">`)
 		$(currentColumn).data('characterIndex', i)
 		$(currentImage).data('characterIndex', i)
 		$(currentColumn).append(currentImage)
@@ -78,7 +137,7 @@ function loadStages () {
 	let newRow = $(`<div class="row"></div>`)
 	for (let i = 1; i < 104; i++) {
 		let currentColumn = $(`<div class="col img-thumbnail"></div>`)
-		let currentImage = $(`<img class="img-fluid" src="https://s3.amazonaws.com/smashassets/_smallassets/_stages/stage_img${i}.jpg">`)
+		let currentImage = $(`<img class="img-fluid" alt="${stageNames[i-1]}" src="https://s3.amazonaws.com/smashassets/_smallassets/_stages/stage_img${i}.jpg">`)
 		$(currentColumn).data('stageNumber', i)
 		$(currentImage).data('stageNumber', i)
 		$(currentColumn).append(currentImage)
@@ -104,7 +163,7 @@ function loadSkins () {
 		if (characterFolders[i] != '51' && characterFolders[i] != '52' && characterFolders[i] != '53') {
 			for (let j = 1; j <= 8; j++) {
 				let currentColumn = $(`<div class="col img-thumbnail"></div>`)
-				let currentImage = $(`<img class="img-fluid" src="https://s3.amazonaws.com/smashassets/_smallassets/_renders/${characterFolders[i]}/0${j}.png">`)
+				let currentImage = $(`<img class="img-fluid" alt="${characterNames[i]} skin number ${j}" src="https://s3.amazonaws.com/smashassets/_smallassets/_renders/${characterFolders[i]}/0${j}.png">`)
 				$(currentColumn).data('characterIndex', i)
 				$(currentColumn).data('skinNumber', j)
 				$(currentImage).data('characterIndex', i)
@@ -123,7 +182,7 @@ function loadOmegas () {
 	let newRow = $(`<div class="row"></div>`)
 	for (let i = 1; i < 104; i++) {
 		let currentColumn = $(`<div class="col img-thumbnail"></div>`)
-		let currentImage = $(`<img class="img-fluid" src="https://s3.amazonaws.com/smashassets/_smallassets/_stages/stage_img${i}.jpg">`)
+		let currentImage = $(`<img class="img-fluid" alt="${stageNames[i-1]} Omega form" src="https://s3.amazonaws.com/smashassets/_smallassets/_stages/stage_img${i}.jpg">`)
 		$(currentColumn).data('omegaNumber', i)
 		$(currentImage).data('omegaNumber', i)
 		$(currentColumn).append(currentImage)
@@ -148,7 +207,7 @@ function loadBattlefields () {
 	let newRow = $(`<div class="row"></div>`)
 	for (let i = 1; i < 104; i++) {
 		let currentColumn = $(`<div class="col img-thumbnail"></div>`)
-		let currentImage = $(`<img class="img-fluid" src="https://s3.amazonaws.com/smashassets/_smallassets/_stages/stage_img${i}.jpg">`)
+		let currentImage = $(`<img class="img-fluid" alt="${stageNames[i-1]} Battlefield form" src="https://s3.amazonaws.com/smashassets/_smallassets/_stages/stage_img${i}.jpg">`)
 		$(currentColumn).data('battlefieldNumber', i)
 		$(currentImage).data('battlefieldNumber', i)
 		$(currentColumn).append(currentImage)

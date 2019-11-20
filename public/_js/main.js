@@ -1,3 +1,62 @@
+let characterNames = ["Mario", "Donkey Kong", "Link", "Samus",
+					  "Dark Samus", "Yoshi", "Kirby", "Fox",
+					  "Pikachu", "Luigi", "Ness", "Captain Falcon",
+					  "Jigglypuff", "Peach", "Daisy", "Bowser",
+					  "Ice Climbers", "Sheik", "Zelda", "Dr. Mario",
+					  "Pichu", "Falco", "Marth", "Lucina", "Young Link",
+					  "Ganondorf", "Mewtwo", "Roy", "Chrom",
+					  "Mr. Game & Watch", "Meta Knight", "Pit",
+					  "Dark Pit", "Zero Suit Samus", "Wario", "Snake",
+					  "Ike", "Pokemon Trainer", "Diddy Kong", "Lucas",
+					  "Sonic", "King Dedede", "Olimar", "Lucario",
+					  "R.O.B.", "Toon Link", "Wolf", "Villager",
+					  "Mega Man", "Wii Fit Trainer", "Rosalina & Luma",
+					  "Little Mac", "Greninja", "Mii Brawler",
+					  "Mii Swordfighter", "Mii Gunner", "Palutena",
+					  "PAC-MAN", "Robin", "Shulk", "Bowser Jr.",
+					  "Duck Hunt", "Ryu", "Ken", "Cloud", "Corrin",
+					  "Bayonetta", "Inkling", "Ridley", "Simon",
+					  "Richter", "King K. Rool", "Isabelle", "Incineroar",
+					  "Piranha Plant", "Joker"]
+
+let stageNames = ["Battlefield", "Big Battlefield", "Final Destination",
+				  "Peach's Castle", "Kongo Jungle", "Hyrule Castle",
+				  "Super Happy Tree", "Dreamland", "Saffron City",
+				  "Mushroom Kingdom", "Princess Peach's Castle",
+				  "Rainbow Cruise", "Kongo Falls", "Jungle Japes",
+				  "Great Bay", "Temple", "Brinstar",
+				  "Yoshi's Island (Melee)", "Yoshi's Story",
+				  "Fountain of Dreams", "Green Greens", "Corneria",
+				  "Venom", "Pokemon Stadium", "Onett",
+				  "Mushroom Kingdom II", "Brinstar Depths", "Big Blue",
+				  "Fourside", "Delfino Plaza", "Mushroomy Kingdom",
+				  "Figure-8 Circuit", "WarioWare, Inc.",
+				  "Bridge of Eldin", "Norfair", "Frigate Orpheon",
+				  "Yoshi's Island", "Halberd", "Lylat Cruise",
+				  "Pokemon Stadium 2", "Port Town Aero Dive",
+				  "Castle Siege", "Distant Planet", "Smashville",
+				  "New Pork City", "Summit", "Skyworld",
+				  "Shadow Moses Island", "Luigi's Mansion",
+				  "Pirate Ship", "Spear Pillar", "75 m", "Mario Bros.",
+				  "Hanenbow", "Green Hill Zone", "3D Land",
+				  "Golden Plains", "Paper Mario", "Gerudo Valley",
+				  "Spirit Train", "Dream Land GB",
+				  "Unova Pokemon League", "Prism Tower", "Mute City SNES",
+				  "Magicant", "Arena Ferox", "Reset Bomb Forest",
+				  "Tortimer Island", "Balloon Fight", "Living Room",
+				  "Find Mii", "Tomodachi Life", "PictoChat 2",
+				  "Mushroom Kingdom U", "Mario Galaxy", "Mario Circuit",
+				  "Skyloft", "The Great Cave Offensive",
+				  "Kalos Pokemon League", "Coliseum", "Flat Zone X",
+				  "Palutena's Temple", "Gamer", "Garden of Hope",
+				  "Town and City", "Wii Fit Studio", "Boxing Ring",
+				  "Gaur Plain", "Duck Hunt", "Wrecking Crew",
+				  "Pilotwings", "Wuhu Island", "Windy Hill Zone",
+				  "Wily Castle", "PAC-LAND", "Super Mario Maker",
+				  "Suzaku Castle", "Midgar", "Umbra Clock Tower",
+				  "New Donk City Hall", "Great Plateau Tower",
+				  "Moray Towers", "Dracula's Castle"]
+
 let userSets
 let characterFolders = ["01", "02", "03", "04", "04e", "05", "06", "07", 
 						"08", "09", "10", "11", "12", "13", "13e", "14",
@@ -166,8 +225,10 @@ function randomize () {
 	// Display results
 	let characterImg = $('#characterImg')
 	$(characterImg).attr('src', `https://s3.amazonaws.com/smashassets/_smallassets/_renders/${selectedCharacter}/0${selectedSkin}.png`)
+	$(characterImg).attr('alt', `${characterNames[characterIndex]} skin ${selectedSkin}`)
 	let stageImg = $('#stageImg')
 	$(stageImg).attr('src', `https://s3.amazonaws.com/smashassets/_smallassets/_stages/stage_img${selectedStage}.jpg`)
+	$(stageImg).attr('alt', `${stageNames[selectedStage-1]}`)
 	let variationText = $('#variationText')
 	variationText.html(varText)
 }
