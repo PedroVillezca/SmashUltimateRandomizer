@@ -445,7 +445,7 @@ function handleSave () {
 		}
 
 		// Get set options
-		let description = $(setTitle).val()
+		let description = sanitizeString($(setTitle).val())
 		let isPublic
 		if ($(optionPrivate).is(':checked')) {
 			isPublic = false;
@@ -807,6 +807,11 @@ function toggleSkin (number, state) {
 	} else {
 		$(skinRow).addClass('unloaded')
 	}
+}
+
+function sanitizeString(str){
+    str = str.replace(/[^a-z0-9áéíóúñü \.,_-]/gim,"");
+    return str.trim();
 }
 
 console.log("Settings page startup")

@@ -8,8 +8,8 @@ function handleLogin () {
 		e.preventDefault()
 		let userText = $('#tfUsername')
 		let userPass = $('#pwd')
-		let username = $(userText).val()
-		let password = $(userPass).val()
+		let username = sanitizeString($(userText).val())
+		let password = sanitizeString($(userPass).val())
 		if (!username || !password) {
 			if (!username) {
 				$(userText).addClass('is-invalid')
@@ -47,6 +47,11 @@ function handleLogin () {
 			}
 		})
 	})
+}
+
+function sanitizeString(str){
+    str = str.replace(/[^a-z0-9áéíóúñü \.,_-]/gim,"");
+    return str.trim();
 }
 
 console.log('Login screen startup')

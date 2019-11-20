@@ -10,9 +10,9 @@ function handleSignup () {
 		let userText = $('#newUsername')
 		let userPass = $('#newPwd')
 		let userConf = $('#confPwd')
-		let username = $(userText).val()
-		let password = $(userPass).val()
-		let cpassword = $(userConf).val()
+		let username = sanitizeString($(userText).val())
+		let password = sanitizeString($(userPass).val())
+		let cpassword = sanitizeString($(userConf).val())
 		let info = {
 			username: username,
 			password: password,
@@ -43,6 +43,11 @@ function handleSignup () {
 			}
 		})
 	})
+}
+
+function sanitizeString(str){
+    str = str.replace(/[^a-z0-9áéíóúñü \.,_-]/gim,"");
+    return str.trim();
 }
 
 console.log('Signup page startup')
