@@ -113,10 +113,14 @@ function getSets () {
 function loadSets (userSets) {
 	let sidebar = $('#sidebar')
 	let emptyMessage = $('#emptyText')
+	let btRandomize = $('#btRandomize')
 	if (userSets.length == 0) {
 		emptyMessage.removeClass('unloaded')
+		$(btRandomize).attr('disabled', true)
+		return
 	} else {
 		emptyMessage.addClass('unloaded')
+		$(btRandomize).attr('disabled', false)
 	}
 	for (let i = 0; i < userSets.length; i++){
 		let currentCard = $(`<div class="card text-center" id="rset${i}">
@@ -130,6 +134,7 @@ function loadSets (userSets) {
 		$(sidebar).append(currentCard)
 	}
 	chooseSet(userSets[0])
+	randomize()
 }
 
 function handleSets () {
