@@ -138,8 +138,8 @@ function filterResults (searchResults) {
 	let characterIndexes = []
 	let stageIndexes = []
 	for (let i = 0; i < characters.length; i++) {
-		if (characterMap.has(characters[i])) {
-			characterIndexes.push(characterMap.get(characters[i]))
+		if (characterMap.has(characters[i].toLowerCase())) {
+			characterIndexes.push(characterMap.get(characters[i].toLowerCase()))
 		} else {
 			if (characters[i] != '') {
 				errorText.html(`${characters[i]} is not a character.`)
@@ -149,8 +149,8 @@ function filterResults (searchResults) {
 		}
 	}
 	for (let i = 0; i < stages.length; i++) {
-		if (stageMap.has(stages[i])) {
-			stageIndexes.push(stageMap.get(stages[i]))
+		if (stageMap.has(stages[i].toLowerCase())) {
+			stageIndexes.push(stageMap.get(stages[i].toLowerCase()))
 		} else {
 			if (stages[i] != '') {
 				errorText.html(`${stages[i]} is not a stage.`)
@@ -238,13 +238,13 @@ function handleDownload() {
 // Helper functions
 function makeCharacterMap () {
 	for (let i = 0; i < characterNames.length; i++) {
-		characterMap.set(characterNames[i], i)
+		characterMap.set(characterNames[i].toLowerCase(), i)
 	}
 }
 
 function makeStageMap() {
 	for (let i = 0; i < stageNames.length; i++) {
-		stageMap.set(stageNames[i], i)
+		stageMap.set(stageNames[i].toLowerCase(), i)
 	}
 }
 
