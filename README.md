@@ -1,5 +1,7 @@
 # SmashUltimateRandomizer
 
+[Link](https://frozen-meadow-13848.herokuapp.com/)
+
 This randomizer was created with the purpose of expanding upon the random functionality offered within Super Smash Bros. Ultimate. It offers the ability to restrict which characters, skins, stages and forms may appear, all of which are features games in the Super Smash Bros. series have never had. Through this webpage, it is also possible to look up and download randomization settings uploaded by other users, in case they are looking for a quick start or some amusing ideas.
 
 ## Usage
